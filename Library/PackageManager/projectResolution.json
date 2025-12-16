@@ -6,8 +6,7 @@
   "inputs": [
     "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Packages\\manifest.json",
     "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Packages\\packages-lock.json",
-    "C:\\Program Files\\Unity\\Hub\\Editor\\6000.3.1f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\BuiltInPackagesCombined.sha1",
-    "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Packages\\com.demsarnika.com.unity.textmeshpro\\package.json"
+    "C:\\Program Files\\Unity\\Hub\\Editor\\6000.3.1f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\BuiltInPackagesCombined.sha1"
   ],
   "outputs": {
     "com.unity.2d.sprite@1.0.0": {
@@ -391,15 +390,6 @@
       "version": "1.0.0",
       "source": "builtin",
       "testable": false
-    },
-    "com.demsarnika.com.unity.textmeshpro@file:C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Packages\\com.demsarnika.com.unity.textmeshpro": {
-      "name": "com.demsarnika.com.unity.textmeshpro",
-      "displayName": "com.unity.textmeshpro",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Packages\\com.demsarnika.com.unity.textmeshpro",
-      "editorCompatibility": "6000.3.1f1",
-      "version": "0.1.0",
-      "source": "embedded",
-      "testable": true
     },
     "com.unity.modules.subsystems@1.0.0": {
       "name": "com.unity.modules.subsystems",

@@ -13,18 +13,10 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639013345869795220
-    m_Hash: 992436577
+      ticks: 639013253898475103
+    m_Hash: 2894761105
 m_EmbeddedPackageManifests:
-  m_ManifestsStatus:
-    C:/Users/nikde/Documents/faks/Power-up-sah/Packages/com.demsarnika.com.unity.textmeshpro/package.json:
-      m_FilePath: C:/Users/nikde/Documents/faks/Power-up-sah/Packages/com.demsarnika.com.unity.textmeshpro/package.json
-      m_PathExists: 1
-      m_ContentTrackingEnabled: 1
-      m_ModificationDate:
-        serializedVersion: 2
-        ticks: 639013330174210839
-      m_Hash: 1403477777
+  m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
 m_ProjectPath: C:/Users/nikde/Documents/faks/Power-up-sah/Packages
@@ -4134,93 +4126,6 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 1.0.0
     minimumUnityVersion: 
-  compliance:
-    status: 0
-    violation:
-      scopePatternExpression: 
-      message: 
-      readMoreLink: 
-- packageId: com.demsarnika.com.unity.textmeshpro@file:C:\Users\nikde\Documents\faks\Power-up-sah\Packages\com.demsarnika.com.unity.textmeshpro
-  testable: 1
-  isDirectDependency: 1
-  version: 0.1.0
-  source: 3
-  resolvedPath: C:\Users\nikde\Documents\faks\Power-up-sah\Packages\com.demsarnika.com.unity.textmeshpro
-  assetPath: Packages/com.demsarnika.com.unity.textmeshpro
-  name: com.demsarnika.com.unity.textmeshpro
-  displayName: com.unity.textmeshpro
-  author:
-    name: Nika
-    email: example@email.com
-    url: http://www.example.com
-  category: 
-  type: 
-  description: "Replace this with your own description of the package. \n\nFor best
-    results, use this text to summarize: \n\u25AA What the package does \n\u25AA
-    How it can benefit the user \n\nNote: Special formatting characters are supported,
-    including line breaks ('\\n') and bullets ('\\u25AA')."
-  errors: []
-  versions:
-    all: []
-    compatible: []
-    recommended: 
-    deprecated: []
-  dependencies:
-  - name: com.unity.test-framework
-    version: 1.6.0
-  resolvedDependencies:
-  - name: com.unity.test-framework
-    version: 1.6.0
-  - name: com.unity.ext.nunit
-    version: 2.0.5
-  - name: com.unity.modules.imgui
-    version: 1.0.0
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-    compliance:
-      status: 0
-      violations: []
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 0
-  isAssetStorePackage: 0
-  datePublishedTicks: 0
-  documentationUrl: https://example.com/
-  hasRepository: 0
-  repository:
-    type: 
-    url: 
-    revision: 
-    path: 
-  unityLifecycle:
-    version: 
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-    isDiscoverable: 0
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  assetStore:
-    productId: 
-  fingerprint: 
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 
-    minimumUnityVersion: 6000.3.1f1
   compliance:
     status: 0
     violation:

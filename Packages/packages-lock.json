@@ -1,13 +1,5 @@
 {
   "dependencies": {
-    "com.demsarnika.com.unity.textmeshpro": {
-      "version": "file:com.demsarnika.com.unity.textmeshpro",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.test-framework": "1.6.0"
-      }
-    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
