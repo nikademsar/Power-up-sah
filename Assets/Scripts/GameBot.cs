@@ -66,6 +66,12 @@ public class GameBot : MonoBehaviour
         }
     }
 
+    public void SetModeFromToggle(bool aiOn)
+    {
+        mode = aiOn ? GameMode.VsBot : GameMode.TwoPlayer;
+    }
+
+
     // Optional: èe želiš UI gumb za preklop
     public void SetTwoPlayer() => mode = GameMode.TwoPlayer;
     public void SetVsBot() => mode = GameMode.VsBot;
