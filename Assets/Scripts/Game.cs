@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Engine;
 
 public class Game : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class Game : MonoBehaviour
     //Game Ending
     private bool gameOver = false;
 
-    private bool aiThinking = false;
+    private Text turnText;
 
 
     //Unity calls this right when the game starts, there are a few built in functions
@@ -49,6 +48,10 @@ public class Game : MonoBehaviour
             SetPosition(playerBlack[i]);
             SetPosition(playerWhite[i]);
         }
+
+        turnText = GameObject.FindGameObjectWithTag("TurnText").GetComponent<Text>();
+        UpdateTurnText();
+
     }
 
     public GameObject Create(string name, int x, int y)
@@ -106,31 +109,19 @@ public class Game : MonoBehaviour
         {
             currentPlayer = "white";
         }
+        UpdateTurnText();
     }
 
     public void Update()
     {
-        // restart logika
         if (gameOver == true && Input.GetMouseButtonDown(0))
         {
             gameOver = false;
-            SceneManager.LoadScene("Game");
-            return;
-        }
-    
-        // AI poteza (primer: AI igra črne)
-        if (!gameOver && !aiThinking && currentPlayer == "black")
-        {
-            aiThinking = true;
-    
-            BoardState state = ExportBoard();
-            var result = Engine.SearchBestMove(state, depth: 3);
-            ApplyMoveToUnity(result.best);
-    
-            aiThinking = false;
+
+            //Using UnityEngine.SceneManagement is needed here
+            SceneManager.LoadScene("Game"); //Restarts the game by loading the scene over again
         }
     }
-
     
     public void Winner(string playerWinner)
     {
@@ -141,86 +132,22 @@ public class Game : MonoBehaviour
         GameObject.FindGameObjectWithTag("WinnerText").GetComponent<Text>().text = playerWinner + " is the winner";
 
         GameObject.FindGameObjectWithTag("RestartText").GetComponent<Text>().enabled = true;
+        
+        UpdateTurnText(); // to bo TurnText skril, ker gameOver = true
     }
 
+    private void UpdateTurnText()
+    {
+        if (turnText == null) return;
 
-    BoardState ExportBoard()
-    {
-        var s = new BoardState();
-        s.whiteToMove = (currentPlayer == "white");
-    
-        for (int x = 0; x < 8; x++)
-        for (int y = 0; y < 8; y++)
+        if (gameOver)
         {
-            var go = positions[x, y];
-            if (go == null)
-            {
-                s.b[x, y] = Piece.Empty;
-                continue;
-            }
-    
-            // ti shranjuješ ime figure v Chessman.name
-            string n = go.GetComponent<Chessman>().name;
-            s.b[x, y] = NameToPiece(n);
+            turnText.enabled = false;
+            return;
         }
-    
-        return s;
-    }
 
-    Piece NameToPiece(string n)
-    {
-        switch (n)
-        {
-            case "white_pawn": return Piece.WP;
-            case "white_knight": return Piece.WN;
-            case "white_bishop": return Piece.WB;
-            case "white_rook": return Piece.WR;
-            case "white_queen": return Piece.WQ;
-            case "white_king": return Piece.WK;
-    
-            case "black_pawn": return Piece.BP;
-            case "black_knight": return Piece.BN;
-            case "black_bishop": return Piece.BB;
-            case "black_rook": return Piece.BR;
-            case "black_queen": return Piece.BQ;
-            case "black_king": return Piece.BK;
-    
-            default: return Piece.Empty;
-        }
-    }
-    
-    void ApplyMoveToUnity(Move m)
-    {
-        GameObject fromGO = GetPosition(m.fromX, m.fromY);
-        if (fromGO == null) return; // safety
-    
-        GameObject toGO = GetPosition(m.toX, m.toY);
-    
-        // če je zajem: uniči figuro na cilju
-        if (toGO != null)
-        {
-            if (toGO.name == "white_king") Winner("black");
-            if (toGO.name == "black_king") Winner("white");
-            Destroy(toGO);
-        }
-    
-        // počisti staro pozicijo
-        SetPositionEmpty(m.fromX, m.fromY);
-    
-        // premakni figuro
-        Chessman cm = fromGO.GetComponent<Chessman>();
-        cm.SetXBoard(m.toX);
-        cm.SetYBoard(m.toY);
-        cm.SetCoords();
-    
-        // zapiši novo pozicijo
-        SetPosition(fromGO);
-    
-        // menjava poteze
-        NextTurn();
-    
-        // pobriši moveplate-e, če so ostali iz user klika
-        cm.DestroyMovePlates();
+        turnText.enabled = true;
+        turnText.text = (currentPlayer == "white") ? "White's turn" : "Black's turn";
     }
 
 }
