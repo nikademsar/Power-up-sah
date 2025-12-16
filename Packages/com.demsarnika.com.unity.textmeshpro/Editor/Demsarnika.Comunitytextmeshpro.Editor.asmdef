@@ -1,0 +1,10 @@
+{
+    "name": "Demsarnika.Comunitytextmeshpro.Editor",
+    "references": [
+      "Demsarnika.Comunitytextmeshpro"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

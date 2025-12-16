@@ -1,30 +1,118 @@
-# Chess_App
- Chess app made using Unity and C#.  This was created as a project to improve my coding skills over winter break.  Also, I plan to help others learn to code using this project.  I will make tutorials on how I made this app for the University of Minnesota's App Developers Club (and potentially YouTube as well).
+\# Šah+ – računalniška šah aplikacija
 
- Tutorial  
- -Go to the TUTORIAL folder for pdf's about how to make this app step-by-step  
- -The .zip files have the Unity Project after the workshop was completed  
- -If you want to follow, for example, Workshop 3, you should download the Workshop 2's zip in order to have what you need   
 
- Features  
- -Click to move  
- -Black and White can win/lose the game  
- -Switches players  
- -Restart the game at the end  
- 
- Additional Possible Features  
- -Starting jump move for pawns  
- -Check for Check  
- -Check for Checkmate  
- -Castling (Rook and King switch)  
- -Saving and Loading a game  
- 
- What can be improved  
- -Porting to Android and IOS devices  
- -The offsets for matrix -> world coordinates should be constants to adhere to coding standards  
- -Duplicated code for combining 
 
- Additional Notes  
-  -If the camera is not the correct aspect ratio for a phone, switch to the game view in Unity.  Switch the aspect ratio to 9:16 (left corner by "Display 1").  
-  -Unity version 2019.3.0f3
-  -Asset credit to Ajay Karat of Devil's Work.shop http://devilswork.shop/ 
+\## Opis projekta
+
+Šah+ je računalniška igra, ki temelji na klasičnih pravilih šaha. Cilj projekta je postopna nadgradnja tradicionalnega šaha v bolj sodobno, interaktivno in dostopno obliko, primerljivo z modernimi video igrami.
+
+
+
+Aplikacija je razvita kot študentski projekt in je trenutno v razvojni fazi.
+
+
+
+---
+
+
+
+\## Trenutna funkcionalnost aplikacije
+
+Trenutna različica aplikacije omogoča:
+
+
+
+\- Igranje klasične šahovske partije
+
+\- Prikaz šahovnice 8×8 z vsemi osnovnimi figurami
+
+\- Izmenično igranje dveh igralcev (beli / črni) na isti napravi
+
+\- Prikaz, kateri igralec je trenutno na potezi
+
+\- Upoštevanje osnovnih pravil šaha
+
+\- Enostaven in pregleden uporabniški vmesnik
+
+
+
+Aplikacija v trenutni fazi \*\*ne vsebuje umetne inteligence\*\*, posebnih moči ali shranjevanja rezultatov.
+
+
+
+---
+
+
+
+\## Načrtovane nadgradnje
+
+V nadaljnjih fazah razvoja bo aplikacija razširjena z naslednjimi funkcionalnostmi:
+
+
+
+\### Način igranja
+
+\- Možnost izbire načina igre:
+
+&nbsp; - Igralec proti igralcu
+
+&nbsp; - Igralec proti računalniku (bot)
+
+\- Različne težavnostne stopnje računalniškega nasprotnika
+
+
+
+\### Igralne razširitve (power-upi)
+
+\- Sistem posebnih moči, ki dopolnjujejo klasični šah, npr.:
+
+&nbsp; - Namig za optimalno potezo
+
+&nbsp; - Začasna blokada nasprotnika
+
+&nbsp; - Premik ali vpliv na nasprotnikovo figuro
+
+\- Omejena in uravnotežena uporaba moči za ohranjanje strateške igre
+
+
+
+\### Dodatne funkcionalnosti
+
+\- Beleženje rezultatov in zgodovine iger
+
+\- Spremljanje napredka igralca
+
+\- Vizualne in grafične izboljšave
+
+\- Optimizacija uporabniške izkušnje
+
+
+
+---
+
+
+
+\## Cilj projekta
+
+Končni cilj projekta je razviti stabilno in uporabniku prijazno aplikacijo, ki združuje strateško razmišljanje klasičnega šaha z dodatnimi igralnimi mehanikami. Projekt želi povečati zanimivost in dostopnost šaha ter ga približati širšemu krogu uporabnikov v bolj igrivi in sodobni obliki.
+
+
+
+---
+
+
+
+\## Tehnologije
+
+\- Unity
+
+\- C#
+
+
+
+\## Status projekta
+
+V razvoju – implementirana osnovna šahovska logika, nadgradnje so načrtovane.
+
+
+

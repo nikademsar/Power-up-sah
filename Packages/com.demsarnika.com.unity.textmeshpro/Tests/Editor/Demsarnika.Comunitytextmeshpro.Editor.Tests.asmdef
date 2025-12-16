@@ -1,0 +1,14 @@
+{
+    "name": "Demsarnika.Comunitytextmeshpro.Editor.Tests",
+    "references": [
+        "Demsarnika.Comunitytextmeshpro.Editor",
+        "Demsarnika.Comunitytextmeshpro"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
