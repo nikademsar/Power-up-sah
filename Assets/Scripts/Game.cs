@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using PowerUpChess.Engine;
+
 
 public class Game : MonoBehaviour
 {
@@ -149,5 +151,97 @@ public class Game : MonoBehaviour
         turnText.enabled = true;
         turnText.text = (currentPlayer == "white") ? "White's turn" : "Black's turn";
     }
+
+
+    // ===== BOT SUPPORT (minimal additions) =====
+
+    public BoardState ExportBoardState()
+    {
+        var s = new BoardState();
+        s.whiteToMove = (currentPlayer == "white");
+
+        for (int x = 0; x < 8; x++)
+        for (int y = 0; y < 8; y++)
+        {
+            var obj = positions[x, y];
+            if (obj == null) { s.b[x, y] = Piece.Empty; continue; }
+
+            var cm = obj.GetComponent<Chessman>();
+            s.b[x, y] = MapChessmanToEnginePiece(cm.name);
+        }
+
+        return s;
+    }
+
+    private Piece MapChessmanToEnginePiece(string n)
+    {
+        // pričakovani formati iz tvoje Create(): "white_pawn", "black_queen", ...
+        // :contentReference[oaicite:6]{index=6}
+        switch (n)
+        {
+            case "white_pawn": return Piece.WP;
+            case "white_knight": return Piece.WN;
+            case "white_bishop": return Piece.WB;
+            case "white_rook": return Piece.WR;
+            case "white_queen": return Piece.WQ;
+            case "white_king": return Piece.WK;
+
+            case "black_pawn": return Piece.BP;
+            case "black_knight": return Piece.BN;
+            case "black_bishop": return Piece.BB;
+            case "black_rook": return Piece.BR;
+            case "black_queen": return Piece.BQ;
+            case "black_king": return Piece.BK;
+        }
+
+        return Piece.Empty;
+    }
+
+    public bool ApplyEngineMove(Move m)
+    {
+        if (gameOver) return false;
+
+        var fromObj = GetPosition(m.fromX, m.fromY);
+        if (fromObj == null) return false;
+
+        var toObj = GetPosition(m.toX, m.toY);
+
+        var fromName = fromObj.GetComponent<Chessman>().name;
+        if (toObj != null)
+        {
+            var toName = toObj.GetComponent<Chessman>().name;
+            bool fromWhite = fromName.StartsWith("white_");
+            bool toWhite = toName.StartsWith("white_");
+            if (fromWhite == toWhite) return false;
+        }
+
+        if (toObj != null)
+        {
+            var capturedName = toObj.GetComponent<Chessman>().name;
+            bool capturedKing = (capturedName == "white_king" || capturedName == "black_king");
+
+            SetPositionEmpty(m.toX, m.toY);
+            Destroy(toObj);
+
+            if (capturedKing)
+            {
+                Winner((currentPlayer == "white") ? "White" : "Black");
+                return true;
+            }
+        }
+
+        SetPositionEmpty(m.fromX, m.fromY);
+
+        var cm = fromObj.GetComponent<Chessman>();
+        cm.SetXBoard(m.toX);
+        cm.SetYBoard(m.toY);
+        cm.Activate();
+
+        SetPosition(fromObj);
+
+        NextTurn();
+        return true;
+    }
+
 
 }

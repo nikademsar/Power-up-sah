@@ -8,6 +8,7 @@ TagManager:
   - WinnerText
   - RestartText
   - TurnText
+  - 'AIToggle '
   layers:
   - Default
   - TransparentFX

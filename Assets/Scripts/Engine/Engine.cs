@@ -15,8 +15,9 @@ namespace PowerUpChess.Engine
             {
                 var p = s.b[x, y];
                 if (p == Piece.Empty) continue;
-                if (white && (sbyte)p < 0) continue;
-                if (!white && (sbyte)p < 0) continue;
+                if (white && (sbyte)p < 0) continue;     // white to move -> skip black pieces
+                if (!white && (sbyte)p > 0) continue;    // black to move -> skip white pieces
+
 
                 AddPieceMoves(s, x, y, p, moves);
             }

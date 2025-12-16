@@ -424,6 +424,7 @@
 "Assets/Scripts/Engine/Engine.cs"
 "Assets/Scripts/Engine/Piece.cs"
 "Assets/Scripts/Game.cs"
+"Assets/Scripts/GameBot.cs"
 "Assets/Scripts/MovePlate.cs"
 -langversion:9.0
 /deterministic
