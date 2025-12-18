@@ -25,6 +25,8 @@ public class Game : MonoBehaviour
     private bool gameOver = false;
 
     private Text turnText;
+    [SerializeField] private GameObject restartButton;
+
 
 
     //Unity calls this right when the game starts, there are a few built in functions
@@ -53,6 +55,10 @@ public class Game : MonoBehaviour
 
         turnText = GameObject.FindGameObjectWithTag("TurnText").GetComponent<Text>();
         UpdateTurnText();
+
+        if (restartButton != null)
+            restartButton.SetActive(true);
+
 
     }
 
@@ -136,6 +142,9 @@ public class Game : MonoBehaviour
         GameObject.FindGameObjectWithTag("RestartText").GetComponent<Text>().enabled = true;
         
         UpdateTurnText(); // to bo TurnText skril, ker gameOver = true
+        if (restartButton != null)
+            restartButton.SetActive(false);
+
     }
 
     private void UpdateTurnText()
@@ -150,6 +159,12 @@ public class Game : MonoBehaviour
 
         turnText.enabled = true;
         turnText.text = (currentPlayer == "white") ? "White's turn" : "Black's turn";
+    }
+
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 

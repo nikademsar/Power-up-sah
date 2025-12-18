@@ -9,6 +9,7 @@ TagManager:
   - RestartText
   - TurnText
   - 'AIToggle '
+  - RestartButton
   layers:
   - Default
   - TransparentFX
