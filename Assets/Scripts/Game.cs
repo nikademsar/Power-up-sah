@@ -25,7 +25,18 @@ public class Game : MonoBehaviour
     private bool gameOver = false;
 
     private Text turnText;
-    [SerializeField] private GameObject restartButton;
+    [SerializeField] private GameObject restartGameButton;
+    [Header("UI Panels")]
+    [SerializeField] private GameObject startPanel;
+    [SerializeField] private GameObject endPanel;
+
+    [Header("UI Text")]
+    [SerializeField] private Text winnerText;   // poveži WinnerText objekt (komponento Text)
+
+    //TODO
+    //[SerializeField] private Dropdown difficultyDropdown;
+    //[SerializeField] private Dropdown themeDropdown;
+
 
 
 
