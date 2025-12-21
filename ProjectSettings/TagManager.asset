@@ -10,10 +10,8 @@ TagManager:
   - TurnText
   - 'AIToggle '
   - RestartButton
-  - StartButton
   - StartPanel
   - EndPanel
-  - RestartGameButton
   layers:
   - Default
   - TransparentFX

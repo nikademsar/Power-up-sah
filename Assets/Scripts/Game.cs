@@ -1,94 +1,138 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using PowerUpChess.Engine;
 
-
 public class Game : MonoBehaviour
 {
-    //Reference from Unity IDE
-    public GameObject chesspiece;
+    [Header("Prefabs")]
+    [SerializeField] private GameObject chesspiece;
 
-    //Matrices needed, positions of each of the GameObjects
-    //Also separate arrays for the players in order to easily keep track of them all
-    //Keep in mind that the same objects are going to be in "positions" and "playerBlack"/"playerWhite"
+    [Header("UI")]
+    [SerializeField] private GameObject startPanel;
+    [SerializeField] private GameObject endPanel;
+    [SerializeField] private Button resetButton;        // Assign the Button component (not the GameObject)
+    [SerializeField] private Text turnText;             // Prefer assigning in Inspector; fallback is by tag
+    [SerializeField] private Text endWinnerText;
+
     private GameObject[,] positions = new GameObject[8, 8];
     private GameObject[] playerBlack = new GameObject[16];
     private GameObject[] playerWhite = new GameObject[16];
 
-    //current turn
     private string currentPlayer = "white";
+    private bool gameOver = true;
+    private bool boardInitialized = false;
 
-    //Game Ending
-    private bool gameOver = false;
+    private void Awake()
+    {
+        if (turnText == null)
+            turnText = GameObject.FindGameObjectWithTag("TurnText")?.GetComponent<Text>();
 
-    private Text turnText;
-    [SerializeField] private GameObject restartGameButton;
-    [Header("UI Panels")]
-    [SerializeField] private GameObject startPanel;
-    [SerializeField] private GameObject endPanel;
+        if (resetButton != null)
+            resetButton.onClick.AddListener(RestartGame);
+    }
 
-    [Header("UI Text")]
-    [SerializeField] private Text winnerText;   // poveži WinnerText objekt (komponento Text)
-
-    //TODO
-    //[SerializeField] private Dropdown difficultyDropdown;
-    //[SerializeField] private Dropdown themeDropdown;
-
-
-
-
-    //Unity calls this right when the game starts, there are a few built in functions
-    //that Unity can call for you
     public void Start()
     {
-        playerWhite = new GameObject[] { Create("white_rook", 0, 0), Create("white_knight", 1, 0),
+        ShowStartState();
+    }
+
+    public void OnPlayPressed()
+    {
+        // Start a new match from a clean state
+        if (boardInitialized)
+            ClearBoard();
+
+        currentPlayer = "white";
+        gameOver = false;
+
+        if (startPanel != null) startPanel.SetActive(false);
+        if (endPanel != null) endPanel.SetActive(false);
+
+        if (resetButton != null) resetButton.gameObject.SetActive(true);
+
+        SetupBoard();
+        boardInitialized = true;
+
+        UpdateTurnText();
+    }
+
+    private void ShowStartState()
+    {
+        gameOver = true;
+
+        if (startPanel != null) startPanel.SetActive(true);
+        if (endPanel != null) endPanel.SetActive(false);
+
+        // Keep reset button visible if you want it on start screen; otherwise set to false
+        if (resetButton != null) resetButton.gameObject.SetActive(true);
+
+        UpdateTurnText();
+    }
+
+    private void SetupBoard()
+    {
+        positions = new GameObject[8, 8];
+
+        playerWhite = new GameObject[]
+        {
+            Create("white_rook", 0, 0), Create("white_knight", 1, 0),
             Create("white_bishop", 2, 0), Create("white_queen", 3, 0), Create("white_king", 4, 0),
             Create("white_bishop", 5, 0), Create("white_knight", 6, 0), Create("white_rook", 7, 0),
             Create("white_pawn", 0, 1), Create("white_pawn", 1, 1), Create("white_pawn", 2, 1),
             Create("white_pawn", 3, 1), Create("white_pawn", 4, 1), Create("white_pawn", 5, 1),
-            Create("white_pawn", 6, 1), Create("white_pawn", 7, 1) };
-        playerBlack = new GameObject[] { Create("black_rook", 0, 7), Create("black_knight",1,7),
-            Create("black_bishop",2,7), Create("black_queen",3,7), Create("black_king",4,7),
-            Create("black_bishop",5,7), Create("black_knight",6,7), Create("black_rook",7,7),
+            Create("white_pawn", 6, 1), Create("white_pawn", 7, 1)
+        };
+
+        playerBlack = new GameObject[]
+        {
+            Create("black_rook", 0, 7), Create("black_knight", 1, 7),
+            Create("black_bishop", 2, 7), Create("black_queen", 3, 7), Create("black_king", 4, 7),
+            Create("black_bishop", 5, 7), Create("black_knight", 6, 7), Create("black_rook", 7, 7),
             Create("black_pawn", 0, 6), Create("black_pawn", 1, 6), Create("black_pawn", 2, 6),
             Create("black_pawn", 3, 6), Create("black_pawn", 4, 6), Create("black_pawn", 5, 6),
-            Create("black_pawn", 6, 6), Create("black_pawn", 7, 6) };
+            Create("black_pawn", 6, 6), Create("black_pawn", 7, 6)
+        };
 
-        //Set all piece positions on the positions board
-        for (int i = 0; i < playerBlack.Length; i++)
+        for (int i = 0; i < 16; i++)
         {
-            SetPosition(playerBlack[i]);
             SetPosition(playerWhite[i]);
+            SetPosition(playerBlack[i]);
+        }
+    }
+
+    private void ClearBoard()
+    {
+        // Destroy all pieces referenced by the board matrix
+        for (int x = 0; x < 8; x++)
+        for (int y = 0; y < 8; y++)
+        {
+            if (positions[x, y] != null)
+            {
+                Destroy(positions[x, y]);
+                positions[x, y] = null;
+            }
         }
 
-        turnText = GameObject.FindGameObjectWithTag("TurnText").GetComponent<Text>();
-        UpdateTurnText();
-
-        if (restartButton != null)
-            restartButton.SetActive(true);
-
-
+        playerWhite = new GameObject[16];
+        playerBlack = new GameObject[16];
+        boardInitialized = false;
     }
 
     public GameObject Create(string name, int x, int y)
     {
         GameObject obj = Instantiate(chesspiece, new Vector3(0, 0, -1), Quaternion.identity);
-        Chessman cm = obj.GetComponent<Chessman>(); //We have access to the GameObject, we need the script
-        cm.name = name; //This is a built in variable that Unity has, so we did not have to declare it before
+        Chessman cm = obj.GetComponent<Chessman>();
+        cm.name = name;
         cm.SetXBoard(x);
         cm.SetYBoard(y);
-        cm.Activate(); //It has everything set up so it can now Activate()
+        cm.Activate();
         return obj;
     }
 
     public void SetPosition(GameObject obj)
     {
         Chessman cm = obj.GetComponent<Chessman>();
-
-        //Overwrites either empty space or whatever was there
         positions[cm.GetXBoard(), cm.GetYBoard()] = obj;
     }
 
@@ -104,8 +148,7 @@ public class Game : MonoBehaviour
 
     public bool PositionOnBoard(int x, int y)
     {
-        if (x < 0 || y < 0 || x >= positions.GetLength(0) || y >= positions.GetLength(1)) return false;
-        return true;
+        return !(x < 0 || y < 0 || x >= 8 || y >= 8);
     }
 
     public string GetCurrentPlayer()
@@ -120,42 +163,33 @@ public class Game : MonoBehaviour
 
     public void NextTurn()
     {
-        if (currentPlayer == "white")
-        {
-            currentPlayer = "black";
-        }
-        else
-        {
-            currentPlayer = "white";
-        }
+        currentPlayer = (currentPlayer == "white") ? "black" : "white";
         UpdateTurnText();
     }
 
-    public void Update()
+    public void Winner(string winnerColorLowercase)
     {
-        if (gameOver == true && Input.GetMouseButtonDown(0))
-        {
-            gameOver = false;
+        // winnerColorLowercase must be "white" or "black"
+        ScoreManager.AddWinFor(winnerColorLowercase);
 
-            //Using UnityEngine.SceneManagement is needed here
-            SceneManager.LoadScene("Game"); //Restarts the game by loading the scene over again
-        }
-    }
-    
-    public void Winner(string playerWinner)
-    {
         gameOver = true;
 
-        //Using UnityEngine.UI is needed here
-        GameObject.FindGameObjectWithTag("WinnerText").GetComponent<Text>().enabled = true;
-        GameObject.FindGameObjectWithTag("WinnerText").GetComponent<Text>().text = playerWinner + " is the winner";
+        // Return to a clean "pre-start" board state (no pieces)
+        if (boardInitialized)
+            ClearBoard();
 
-        GameObject.FindGameObjectWithTag("RestartText").GetComponent<Text>().enabled = true;
-        
-        UpdateTurnText(); // to bo TurnText skril, ker gameOver = true
-        if (restartButton != null)
-            restartButton.SetActive(false);
+        if (startPanel != null) startPanel.SetActive(false);
+        if (endPanel != null) endPanel.SetActive(true);
 
+        if (endWinnerText != null)
+        {
+            string label = (winnerColorLowercase == "white") ? "White" : "Black";
+            endWinnerText.text = label + " is the winner";
+        }
+
+        if (resetButton != null) resetButton.gameObject.SetActive(true);
+
+        UpdateTurnText();
     }
 
     private void UpdateTurnText()
@@ -172,14 +206,12 @@ public class Game : MonoBehaviour
         turnText.text = (currentPlayer == "white") ? "White's turn" : "Black's turn";
     }
 
-
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-
-    // ===== BOT SUPPORT (minimal additions) =====
+    // ===== BOT SUPPORT =====
 
     public BoardState ExportBoardState()
     {
@@ -201,8 +233,6 @@ public class Game : MonoBehaviour
 
     private Piece MapChessmanToEnginePiece(string n)
     {
-        // pričakovani formati iz tvoje Create(): "white_pawn", "black_queen", ...
-        // :contentReference[oaicite:6]{index=6}
         switch (n)
         {
             case "white_pawn": return Piece.WP;
@@ -251,7 +281,7 @@ public class Game : MonoBehaviour
 
             if (capturedKing)
             {
-                Winner((currentPlayer == "white") ? "White" : "Black");
+                Winner(currentPlayer);
                 return true;
             }
         }
@@ -268,6 +298,4 @@ public class Game : MonoBehaviour
         NextTurn();
         return true;
     }
-
-
 }

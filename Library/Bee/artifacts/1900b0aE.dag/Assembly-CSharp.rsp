@@ -419,13 +419,17 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.1f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.1f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.3.1f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
-"Assets/Scripts/Chessman.cs"
-"Assets/Scripts/Engine/BoardState.cs"
-"Assets/Scripts/Engine/Engine.cs"
-"Assets/Scripts/Engine/Piece.cs"
+"Assets/Scripts/Board/Chessman.cs"
+"Assets/Scripts/Board/MovePlate.cs"
+"Assets/Scripts/Bot/BoardState.cs"
+"Assets/Scripts/Bot/Engine.cs"
+"Assets/Scripts/Bot/Piece.cs"
 "Assets/Scripts/Game.cs"
 "Assets/Scripts/GameBot.cs"
-"Assets/Scripts/MovePlate.cs"
+"Assets/Scripts/GameSettings.cs"
+"Assets/Scripts/ScoreManager.cs"
+"Assets/Scripts/UI/ScoreUI.cs"
+"Assets/Scripts/UI/SettingsUI.cs"
 -langversion:9.0
 /deterministic
 /optimize+
