@@ -14,6 +14,8 @@ public class Game : MonoBehaviour
     [SerializeField] private Button resetButton;        // Assign the Button component (not the GameObject)
     [SerializeField] private Text turnText;             // Prefer assigning in Inspector; fallback is by tag
     [SerializeField] private Text endWinnerText;
+    [SerializeField] private ScoreUI scoreUI;
+
 
     private GameObject[,] positions = new GameObject[8, 8];
     private GameObject[] playerBlack = new GameObject[16];
@@ -30,6 +32,10 @@ public class Game : MonoBehaviour
 
         if (resetButton != null)
             resetButton.onClick.AddListener(RestartGame);
+
+        if (endWinnerText == null)
+            Debug.LogError("Game: endWinnerText is not assigned in Inspector.");
+
     }
 
     public void Start()
@@ -171,6 +177,12 @@ public class Game : MonoBehaviour
     {
         // winnerColorLowercase must be "white" or "black"
         ScoreManager.AddWinFor(winnerColorLowercase);
+
+        if (scoreUI != null)
+            scoreUI.Refresh();
+        else
+            Debug.LogWarning("Game: scoreUI is not assigned; score text won't auto-refresh.");
+
 
         gameOver = true;
 

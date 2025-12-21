@@ -12,6 +12,7 @@ TagManager:
   - RestartButton
   - StartPanel
   - EndPanel
+  - ScoreText
   layers:
   - Default
   - TransparentFX

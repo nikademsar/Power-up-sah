@@ -13,7 +13,7 @@ public class ScoreUI : MonoBehaviour
     public void Refresh()
     {
         if (scoreText == null) return;
-        scoreText.text = $"Score\nWhite: {ScoreManager.WhiteWins}\nBlack: {ScoreManager.BlackWins}";
+        scoreText.text = $"Score: White {ScoreManager.WhiteWins} vs Black {ScoreManager.BlackWins}";
     }
 
     public void OnResetScoreClicked()
