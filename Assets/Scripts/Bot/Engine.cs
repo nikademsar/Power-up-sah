@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 
 namespace PowerUpChess.Engine
 {
@@ -37,6 +39,126 @@ namespace PowerUpChess.Engine
 
             return moves;
         }
+
+
+    static readonly Random Rng = new Random();
+
+
+
+        public static List<Move> GenerateLegalMoves(BoardState s)
+{
+    var pseudo = GenerateMoves(s);
+    var legal = new List<Move>(pseudo.Count);
+
+    bool sideToMoveIsWhite = s.whiteToMove;
+
+    foreach (var raw in pseudo)
+    {
+        var m = raw;
+        MakeMove(s, ref m);
+
+        // po MakeMove se je turn zamenjal, zato preverjamo kralja strani,
+        // ki je ravno premaknila (sideToMoveIsWhite)
+        bool inCheck = IsInCheck(s, sideToMoveIsWhite);
+
+        UndoMove(s, m);
+
+        if (!inCheck) legal.Add(raw);
+    }
+
+    return legal;
+}
+
+static bool IsInCheck(BoardState s, bool whiteKing)
+{
+    // najdi kralja
+    Piece king = whiteKing ? Piece.WK : Piece.BK;
+    for (int x = 0; x < 8; x++)
+    for (int y = 0; y < 8; y++)
+    {
+        if (s.b[x, y] == king)
+        {
+            // če je beli kralj, ga napada črna stran; če je črni, ga napada bela
+            bool attackedByWhite = !whiteKing;
+            return IsSquareAttacked(s, x, y, attackedByWhite);
+        }
+    }
+
+    // če kralja ni (ne bi smelo), obravnavaj kot "v šahu"
+    return true;
+}
+
+static bool IsSquareAttacked(BoardState s, int x, int y, bool byWhite)
+{
+    // 1) Napadi kmetov
+    // beli kmet napada (x±1, y+1); črni (x±1, y-1)
+    int pawnDir = byWhite ? +1 : -1;
+    int py = y - pawnDir; // obrnjeno: če napadalec je na (x±1, y - dir)
+    if (OnBoard(x - 1, py) && s.b[x - 1, py] == (byWhite ? Piece.WP : Piece.BP)) return true;
+    if (OnBoard(x + 1, py) && s.b[x + 1, py] == (byWhite ? Piece.WP : Piece.BP)) return true;
+
+    // 2) Napadi skakača
+    int[] kx = { +1, +2, +2, +1, -1, -2, -2, -1 };
+    int[] ky = { +2, +1, -1, -2, -2, -1, +1, +2 };
+    Piece n = byWhite ? Piece.WN : Piece.BN;
+    for (int i = 0; i < 8; i++)
+    {
+        int nx = x + kx[i], ny = y + ky[i];
+        if (OnBoard(nx, ny) && s.b[nx, ny] == n) return true;
+    }
+
+    // 3) Napadi kralja (sosednja polja)
+    Piece k = byWhite ? Piece.WK : Piece.BK;
+    for (int dx = -1; dx <= 1; dx++)
+    for (int dy = -1; dy <= 1; dy++)
+    {
+        if (dx == 0 && dy == 0) continue;
+        int nx = x + dx, ny = y + dy;
+        if (OnBoard(nx, ny) && s.b[nx, ny] == k) return true;
+    }
+
+    // 4) Linijski napadi: trdnjava/dama (orth) in lovec/dama (diag)
+    // orth
+    if (RayHits(s, x, y, +1, 0, byWhite, rookLike: true)) return true;
+    if (RayHits(s, x, y, -1, 0, byWhite, rookLike: true)) return true;
+    if (RayHits(s, x, y, 0, +1, byWhite, rookLike: true)) return true;
+    if (RayHits(s, x, y, 0, -1, byWhite, rookLike: true)) return true;
+
+    // diag
+    if (RayHits(s, x, y, +1, +1, byWhite, rookLike: false)) return true;
+    if (RayHits(s, x, y, -1, -1, byWhite, rookLike: false)) return true;
+    if (RayHits(s, x, y, -1, +1, byWhite, rookLike: false)) return true;
+    if (RayHits(s, x, y, +1, -1, byWhite, rookLike: false)) return true;
+
+    return false;
+}
+
+static bool RayHits(BoardState s, int x, int y, int dx, int dy, bool byWhite, bool rookLike)
+{
+    int nx = x + dx, ny = y + dy;
+    while (OnBoard(nx, ny))
+    {
+        var p = s.b[nx, ny];
+        if (p != Piece.Empty)
+        {
+            // zadene prva figura na žarku
+            if (byWhite)
+            {
+                if (rookLike && (p == Piece.WR || p == Piece.WQ)) return true;
+                if (!rookLike && (p == Piece.WB || p == Piece.WQ)) return true;
+            }
+            else
+            {
+                if (rookLike && (p == Piece.BR || p == Piece.BQ)) return true;
+                if (!rookLike && (p == Piece.BB || p == Piece.BQ)) return true;
+            }
+            return false;
+        }
+        nx += dx; ny += dy;
+    }
+    return false;
+}
+
 
         /// <summary>
         /// Glede na tip figure kliče ustrezno metodo za generiranje potez.
@@ -300,14 +422,23 @@ namespace PowerUpChess.Engine
         {
             if (depth == 0) return color * Eval(s);
 
-            var moves = GenerateMoves(s);
-            if (moves.Count == 0) return color * Eval(s);
+            var moves = GenerateLegalMoves(s);
+            if (moves.Count == 0)
+                {
+                    // Če nima legalnih potez:
+                    // - če je v šahu -> mat
+                    bool inCheck = IsInCheck(s, s.whiteToMove);
+                    return inCheck ? -1000000 : 0;
+                }
+
 
             // osnovno urejanje potez (zajemi prej)
             moves.Sort((a, b) => Math.Abs(PieceValue(b.captured)).CompareTo(Math.Abs(PieceValue(a.captured))));
 
             int bestScore = int.MinValue + 1;
-            Move localBest = default;
+
+            // hranimo vse poteze, ki so trenutno najboljše
+            var bestMoves = root ? new List<Move>(8) : null;
 
             foreach (var raw in moves)
             {
@@ -319,12 +450,37 @@ namespace PowerUpChess.Engine
 
                 UndoMove(s, m);
 
-                if (score > bestScore) { bestScore = score; localBest = m; }
+                if (score > bestScore)
+                {
+                    bestScore = score;
+
+                    if (root)
+                    {
+                        bestMoves!.Clear();
+                        bestMoves.Add(m);
+                    }
+                }
+                else if (root && score == bestScore)
+                {
+                    bestMoves!.Add(m);
+                }
+
                 if (score > alpha) alpha = score;
                 if (alpha >= beta) break;
             }
 
-            if (root) bestMove = localBest;
+            if (root)
+            {
+                if (bestMoves != null && bestMoves.Count > 0)
+                {
+                    bestMove = bestMoves[Rng.Next(bestMoves.Count)];
+                }
+                else
+                {
+                    bestMove = default;
+                }
+            }
+
             return bestScore;
         }
 

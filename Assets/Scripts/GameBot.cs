@@ -10,12 +10,12 @@ public class GameBot : MonoBehaviour
     public GameMode mode = GameMode.TwoPlayer;
 
     [Header("Bot side (only used in VsBot)")]
-    public bool botPlaysBlack = true;  // tipièno: igralec white, bot black
+    public bool botPlaysBlack = true;  // tipiï¿½no: igralec white, bot black
     public bool botPlaysWhite = false;
 
     [Header("Bot settings")]
     [Range(1, 5)]
-    public int searchDepth = 2;
+    public int searchDepth = 5;
 
     public float thinkDelaySeconds = 0.15f;
 
@@ -54,15 +54,15 @@ public class GameBot : MonoBehaviour
         var (best, score) = Engine.SearchBestMove(s, searchDepth);
 
         // 3) Apply to Unity
-        // èe engine vrne default/invalid potezo (npr. ni potez), poskusi varno zakljuèiti
+        // ï¿½e engine vrne default/invalid potezo (npr. ni potez), poskusi varno zakljuï¿½iti
         bool ok = game.ApplyEngineMove(best);
 
         botThinking = false;
 
         if (!ok)
         {
-            // èe engine vrne potezo, ki je Unity ne sprejme, je engine/board-map še neskladen
-            // v tem primeru ne delaj niè (da ne zmrzneš igre s loopom)
+            // ï¿½e engine vrne potezo, ki je Unity ne sprejme, je engine/board-map ï¿½e neskladen
+            // v tem primeru ne delaj niï¿½ (da ne zmrzneï¿½ igre s loopom)
         }
     }
 
@@ -72,7 +72,7 @@ public class GameBot : MonoBehaviour
     }
 
 
-    // Optional: èe želiš UI gumb za preklop
+    // Optional: ï¿½e ï¿½eliï¿½ UI gumb za preklop
     public void SetTwoPlayer() => mode = GameMode.TwoPlayer;
     public void SetVsBot() => mode = GameMode.VsBot;
 }

@@ -14,8 +14,8 @@ public static class GameSettings
 
     public static int Depth
     {
-        get => Mathf.Clamp(PlayerPrefs.GetInt(K_DEPTH, 2), 1, 5);
-        set { PlayerPrefs.SetInt(K_DEPTH, Mathf.Clamp(value, 1, 5)); PlayerPrefs.Save(); }
+        get => Mathf.Clamp(PlayerPrefs.GetInt(K_DEPTH, 2), 3, 7);
+        set { PlayerPrefs.SetInt(K_DEPTH, Mathf.Clamp(value, 3, 7)); PlayerPrefs.Save(); }
     }
 
     public static bool BotPlaysBlack

@@ -15,8 +15,8 @@ public class SettingsUI : MonoBehaviour
 
         if (depthSlider != null)
         {
-            depthSlider.minValue = 1;
-            depthSlider.maxValue = 5;
+            depthSlider.minValue = 3;
+            depthSlider.maxValue = 7;
             depthSlider.wholeNumbers = true;
             depthSlider.value = GameSettings.Depth;
         }
