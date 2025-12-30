@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using PowerUpChess.Engine;
@@ -38,23 +38,70 @@ public class Game : MonoBehaviour
     // 2  opponent figure moves like a pawn
     // 3  replace a random pawn with better figure
     // 4  swap two figures
+
+    public bool powerUpsEnabled = false;
+
+    private int whiteLostPieces = 0;
+    private int blackLostPieces = 0;
+
+    private const int LOST_PIECES_REQUIRED_FOR_POWERUP = 2;
+
+    private void powerUpUsed()
+    {
+        if (powerUpPlayer == "white")
+        {
+            whiteLostPieces = 0;
+        }
+        else
+        {
+            blackLostPieces = 0;
+        }
+        
+        powerUpsEnabled = false;
+    }
+
     public void ActivateDoubleMovePowerUp(string player)
     {
+        if (!powerUpsEnabled)
+        {
+
+            Debug.Log("Power ups not available!");
+            return;
+        }
+        Debug.Log("Double move power up");
         powerUpPlayer = player;
         currentPowerUp = 0;
         resetMovesPowerUp();
+
+        powerUpUsed();
     }
 
     public void ActivatePawnQueenPowerUp(string player)
     {
+        if (!powerUpsEnabled)
+        {
+            Debug.Log("Power ups not available!");
+            return;
+        }
+        Debug.Log("Pawn Queen power up");
         powerUpPlayer = player;
         currentPowerUp = 1;
+        powerUpUsed();
+
     }
 
     public void ActivateRestrictToPawnPowerUp(string player)
     {
+        if (!powerUpsEnabled)
+        {
+            Debug.Log("Power ups not available!");
+            return;
+        }
+        Debug.Log("Opponent moves like pawn power up");
         powerUpPlayer = player;
         currentPowerUp = 2;
+        powerUpUsed();
+
     }
 
     public GameObject GetRandomPawn(string player)
@@ -77,6 +124,12 @@ public class Game : MonoBehaviour
 
     public void ActivatePawnUpgradePowerUp(string player)
     {
+        if (!powerUpsEnabled)
+        {
+            Debug.Log("Power ups not available!");
+            return;
+        }
+        Debug.Log("Replace pawn with a better figure power up");
         powerUpPlayer = player;
         currentPowerUp = 3;
 
@@ -92,14 +145,26 @@ public class Game : MonoBehaviour
         string newName = (player == "white") ? ("white_" + figure) : ("black_" + figure);
         cm.name = newName;
         cm.Activate();
+
+        powerUpUsed();
+
     }
 
     public void ActivateSwapPowerUp(string player)
     {
+        if (!powerUpsEnabled)
+        {
+            Debug.Log("Power ups not available!");
+            return;
+        }
+        Debug.Log("Swap figure power up");
         powerUpPlayer = player;
         currentPowerUp = 4;
         selectedPiece1 = null;
         selectedPiece2 = null;
+
+        powerUpUsed();
+
     }
 
     public void SwapPieces(GameObject a, GameObject b)
@@ -132,37 +197,62 @@ public class Game : MonoBehaviour
         Debug.Log($"Swapped {cmA.name} with {cmB.name}");
     }
 
+    public void RegisterPieceLoss(GameObject piece)
+    {
+        if (piece == null) return;
+
+        string n = piece.GetComponent<Chessman>().name;
+
+        if (n.StartsWith("white_"))
+        {
+            whiteLostPieces++;
+
+            if (whiteLostPieces >= LOST_PIECES_REQUIRED_FOR_POWERUP && powerUpPlayer == "white")
+            {
+                powerUpsEnabled = true;
+                Debug.Log("white player powerups enabled!");
+            }
+        }
+        else if (n.StartsWith("black_"))
+        {
+            blackLostPieces++;
+
+
+            if (blackLostPieces >= LOST_PIECES_REQUIRED_FOR_POWERUP && powerUpPlayer == "black")
+            {
+                powerUpsEnabled = true;
+                Debug.Log("black player powerups enabled!");
+            }
+        }
+    }
+
+
     void Update()
     {
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             ActivateDoubleMovePowerUp("white");
-            Debug.Log("Double move power up");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ActivatePawnQueenPowerUp("white");
-            Debug.Log("Pawn Queen power up");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ActivateRestrictToPawnPowerUp("white");
-            Debug.Log("Opponent moves like pawn power up");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             ActivatePawnUpgradePowerUp("white");
-            Debug.Log("Replace pawn with a better figure power up");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             ActivateSwapPowerUp("white");
-            Debug.Log("Swap figure power up");
         }
     }
 
@@ -441,6 +531,8 @@ public class Game : MonoBehaviour
         var fromName = fromObj.GetComponent<Chessman>().name;
         if (toObj != null)
         {
+            RegisterPieceLoss(toObj);
+
             var toName = toObj.GetComponent<Chessman>().name;
             bool fromWhite = fromName.StartsWith("white_");
             bool toWhite = toName.StartsWith("white_");
