@@ -42,7 +42,7 @@ public class MovePlate : MonoBehaviour
         }
 
         //Set the Chesspiece's original location to be empty
-        controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), 
+        controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(),
             reference.GetComponent<Chessman>().GetYBoard());
 
         //Move reference chess piece to this position
@@ -52,6 +52,14 @@ public class MovePlate : MonoBehaviour
 
         //Update the matrix
         controller.GetComponent<Game>().SetPosition(reference);
+
+        Game g = controller.GetComponent<Game>();
+
+        // remove powerup 1 after one move
+        if (g.currentPowerUp == 1)
+        {
+            g.currentPowerUp = -1;
+        }
 
         //Switch Current Player
         controller.GetComponent<Game>().NextTurn();

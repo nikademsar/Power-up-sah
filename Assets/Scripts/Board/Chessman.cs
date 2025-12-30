@@ -86,6 +86,31 @@ public class Chessman : MonoBehaviour
 
     private void OnMouseUp()
     {
+        Game g = controller.GetComponent<Game>();
+        if (g.currentPowerUp == 4 && g.GetCurrentPlayer() == g.powerUpPlayer)
+        {
+            if (g.selectedPiece1 == null)
+            {
+                g.selectedPiece1 = this.gameObject;
+                Debug.Log("First piece selected: " + name);
+            }
+            else
+            {
+                g.selectedPiece2 = this.gameObject;
+                Debug.Log("Second piece selected: " + name);
+
+                g.SwapPieces(g.selectedPiece1, g.selectedPiece2);
+
+                g.currentPowerUp = -1;
+                g.selectedPiece1 = null;
+                g.selectedPiece2 = null;
+
+                g.NextTurn();
+            }
+
+            return; 
+        }
+
         if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
         {
             //Remove all moveplates relating to previously selected piece
@@ -108,10 +133,22 @@ public class Chessman : MonoBehaviour
 
     public void InitiateMovePlates()
     {
+
+        Game g = controller.GetComponent<Game>();
+
+        //powerup 2
+        bool restrictedToPawnMovement = (g.currentPowerUp == 2) && (g.powerUpPlayer != player);
+
         switch (this.name)
         {
             case "black_queen":
             case "white_queen":
+                if (restrictedToPawnMovement)
+                {
+                    PawnLikeMovement();
+                    break;
+                }
+
                 LineMovePlate(1, 0);
                 LineMovePlate(0, 1);
                 LineMovePlate(1, 1);
@@ -123,10 +160,22 @@ public class Chessman : MonoBehaviour
                 break;
             case "black_knight":
             case "white_knight":
+                if (restrictedToPawnMovement)
+                {
+                    PawnLikeMovement();
+                    break;
+                }
+
                 LMovePlate();
                 break;
             case "black_bishop":
             case "white_bishop":
+                if (restrictedToPawnMovement)
+                {
+                    PawnLikeMovement();
+                    break;
+                }
+
                 LineMovePlate(1, 1);
                 LineMovePlate(1, -1);
                 LineMovePlate(-1, 1);
@@ -134,23 +183,57 @@ public class Chessman : MonoBehaviour
                 break;
             case "black_king":
             case "white_king":
+                if (restrictedToPawnMovement)
+                {
+                    PawnLikeMovement();
+                    break;
+                }
                 SurroundMovePlate();
                 break;
             case "black_rook":
             case "white_rook":
+                if (restrictedToPawnMovement)
+                {
+                    PawnLikeMovement();
+                    break;
+                }
                 LineMovePlate(1, 0);
                 LineMovePlate(0, 1);
                 LineMovePlate(-1, 0);
                 LineMovePlate(0, -1);
                 break;
             case "black_pawn":
-                PawnMovePlate(xBoard, yBoard - 1);
-                break;
             case "white_pawn":
-                PawnMovePlate(xBoard, yBoard + 1);
+                // powerup 1
+                if (g.currentPowerUp == 1 && g.powerUpPlayer == player)
+                {
+                    LineMovePlate(1, 0);
+                    LineMovePlate(-1, 0);
+                    LineMovePlate(0, 1);
+                    LineMovePlate(0, -1);
+                    LineMovePlate(1, 1);
+                    LineMovePlate(1, -1);
+                    LineMovePlate(-1, 1);
+                    LineMovePlate(-1, -1);
+                }
+                else
+                {
+                    // normal pawn behavior
+                    if (player == "white")
+                        PawnMovePlate(xBoard, yBoard + 1);
+                    else
+                        PawnMovePlate(xBoard, yBoard - 1);
+                }
                 break;
         }
     }
+
+    void PawnLikeMovement()
+    {
+        int direction = (player == "white") ? 1 : -1;
+        PawnMovePlate(xBoard, yBoard + direction);
+    }
+
 
     public void LineMovePlate(int xIncrement, int yIncrement)
     {

@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using PowerUpChess.Engine;
+using System.Linq;
 
 public class Game : MonoBehaviour
 {
@@ -24,6 +25,147 @@ public class Game : MonoBehaviour
     private string currentPlayer = "white";
     private bool gameOver = true;
     private bool boardInitialized = false;
+
+    public string powerUpPlayer = "white";
+    private int powerUpMoves = 2;
+
+    public GameObject selectedPiece1 = null;
+    public GameObject selectedPiece2 = null;
+
+    public int currentPowerUp = -1;
+    // 0  two moves
+    // 1  pawn moves like a queen 
+    // 2  opponent figure moves like a pawn
+    // 3  replace a random pawn with better figure
+    // 4  swap two figures
+    public void ActivateDoubleMovePowerUp(string player)
+    {
+        powerUpPlayer = player;
+        currentPowerUp = 0;
+        resetMovesPowerUp();
+    }
+
+    public void ActivatePawnQueenPowerUp(string player)
+    {
+        powerUpPlayer = player;
+        currentPowerUp = 1;
+    }
+
+    public void ActivateRestrictToPawnPowerUp(string player)
+    {
+        powerUpPlayer = player;
+        currentPowerUp = 2;
+    }
+
+    public GameObject GetRandomPawn(string player)
+    {
+        GameObject[] pawns;
+
+        if (player == "white")
+            pawns = playerWhite;
+        else
+            pawns = playerBlack;
+
+        // filter only pawns still on board
+        var alivePawns = pawns.Where(p => p != null && p.GetComponent<Chessman>().name.Contains("pawn")).ToArray();
+
+        if (alivePawns.Length == 0) return null;
+
+        int index = Random.Range(0, alivePawns.Length);
+        return alivePawns[index];
+    }
+
+    public void ActivatePawnUpgradePowerUp(string player)
+    {
+        powerUpPlayer = player;
+        currentPowerUp = 3;
+
+        GameObject pawn = GetRandomPawn(player);
+        if (pawn == null) return;
+
+        Chessman cm = pawn.GetComponent<Chessman>();
+
+        string[] availableFigures = { "bishop", "rook", "knight" };
+
+        string figure = availableFigures[UnityEngine.Random.Range(0, availableFigures.Length)];
+
+        string newName = (player == "white") ? ("white_" + figure) : ("black_" + figure);
+        cm.name = newName;
+        cm.Activate();
+    }
+
+    public void ActivateSwapPowerUp(string player)
+    {
+        powerUpPlayer = player;
+        currentPowerUp = 4;
+        selectedPiece1 = null;
+        selectedPiece2 = null;
+    }
+
+    public void SwapPieces(GameObject a, GameObject b)
+    {
+        if (a == null || b == null) return;
+
+        Chessman cmA = a.GetComponent<Chessman>();
+        Chessman cmB = b.GetComponent<Chessman>();
+
+        // store original positions
+        int xA = cmA.GetXBoard();
+        int yA = cmA.GetYBoard();
+        int xB = cmB.GetXBoard();
+        int yB = cmB.GetYBoard();
+
+        // swap positions in board array
+        positions[xA, yA] = b;
+        positions[xB, yB] = a;
+
+        // swap coordinates
+        cmA.SetXBoard(xB);
+        cmA.SetYBoard(yB);
+        cmB.SetXBoard(xA);
+        cmB.SetYBoard(yA);
+
+        // update Unity positions
+        cmA.SetCoords();
+        cmB.SetCoords();
+
+        Debug.Log($"Swapped {cmA.name} with {cmB.name}");
+    }
+
+    void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            ActivateDoubleMovePowerUp("white");
+            Debug.Log("Double move power up");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ActivatePawnQueenPowerUp("white");
+            Debug.Log("Pawn Queen power up");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ActivateRestrictToPawnPowerUp("white");
+            Debug.Log("Opponent moves like pawn power up");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ActivatePawnUpgradePowerUp("white");
+            Debug.Log("Replace pawn with a better figure power up");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            ActivateSwapPowerUp("white");
+            Debug.Log("Swap figure power up");
+        }
+    }
+
 
     private void Awake()
     {
@@ -111,14 +253,14 @@ public class Game : MonoBehaviour
     {
         // Destroy all pieces referenced by the board matrix
         for (int x = 0; x < 8; x++)
-        for (int y = 0; y < 8; y++)
-        {
-            if (positions[x, y] != null)
+            for (int y = 0; y < 8; y++)
             {
-                Destroy(positions[x, y]);
-                positions[x, y] = null;
+                if (positions[x, y] != null)
+                {
+                    Destroy(positions[x, y]);
+                    positions[x, y] = null;
+                }
             }
-        }
 
         playerWhite = new GameObject[16];
         playerBlack = new GameObject[16];
@@ -169,8 +311,30 @@ public class Game : MonoBehaviour
 
     public void NextTurn()
     {
+        if (currentPowerUp == 0 && currentPlayer == powerUpPlayer)
+        {
+            powerUpMoves--;
+            if (powerUpMoves > 0)
+            {
+                return;
+            }
+            else
+            {
+                currentPowerUp = -1;
+            }
+        }
+
+        if (currentPowerUp == 2 && currentPlayer == powerUpPlayer)
+        {
+            currentPowerUp = -1;
+        }
         currentPlayer = (currentPlayer == "white") ? "black" : "white";
         UpdateTurnText();
+    }
+
+    public void resetMovesPowerUp()
+    {
+        powerUpMoves = 2;
     }
 
     public void Winner(string winnerColorLowercase)
@@ -231,14 +395,14 @@ public class Game : MonoBehaviour
         s.whiteToMove = (currentPlayer == "white");
 
         for (int x = 0; x < 8; x++)
-        for (int y = 0; y < 8; y++)
-        {
-            var obj = positions[x, y];
-            if (obj == null) { s.b[x, y] = Piece.Empty; continue; }
+            for (int y = 0; y < 8; y++)
+            {
+                var obj = positions[x, y];
+                if (obj == null) { s.b[x, y] = Piece.Empty; continue; }
 
-            var cm = obj.GetComponent<Chessman>();
-            s.b[x, y] = MapChessmanToEnginePiece(cm.name);
-        }
+                var cm = obj.GetComponent<Chessman>();
+                s.b[x, y] = MapChessmanToEnginePiece(cm.name);
+            }
 
         return s;
     }
