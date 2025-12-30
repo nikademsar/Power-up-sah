@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ public class MovePlate : MonoBehaviour
     public void OnMouseUp()
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
-
+        Game g = controller.GetComponent<Game>();
         //Destroy the victim Chesspiece
         if (attack)
         {
@@ -38,6 +38,7 @@ public class MovePlate : MonoBehaviour
             if (cp.name == "white_king") controller.GetComponent<Game>().Winner("black");
             if (cp.name == "black_king") controller.GetComponent<Game>().Winner("white");
 
+            g.RegisterPieceLoss(cp);
             Destroy(cp);
         }
 
@@ -52,8 +53,6 @@ public class MovePlate : MonoBehaviour
 
         //Update the matrix
         controller.GetComponent<Game>().SetPosition(reference);
-
-        Game g = controller.GetComponent<Game>();
 
         // remove powerup 1 after one move
         if (g.currentPowerUp == 1)
