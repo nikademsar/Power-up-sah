@@ -1,18 +1,18 @@
 {
   "context": {
-    "projectPath": "C:/Users/nikde/Documents/faks/Power-up-sah/Packages",
+    "projectPath": "C:/Users/Klemen/Desktop/Pumpkin/Power-up-sah/Packages",
     "unityVersion": "6000.3.1f1"
   },
   "inputs": [
-    "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Packages\\manifest.json",
-    "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Packages\\packages-lock.json",
+    "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Packages\\manifest.json",
+    "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Packages\\packages-lock.json",
     "C:\\Program Files\\Unity\\Hub\\Editor\\6000.3.1f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\BuiltInPackagesCombined.sha1"
   ],
   "outputs": {
     "com.unity.2d.sprite@1.0.0": {
       "name": "com.unity.2d.sprite",
       "displayName": "2D Sprite",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.2d.sprite@82f01c8c75ca",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.2d.sprite@82f01c8c75ca",
       "fingerprint": "82f01c8c75ca2d707990e8dc249b71ab7d1aa33e",
       "editorCompatibility": "2019.2.0a1",
       "version": "1.0.0",
@@ -22,7 +22,7 @@
     "com.unity.2d.tilemap@1.0.0": {
       "name": "com.unity.2d.tilemap",
       "displayName": "2D Tilemap Editor",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.2d.tilemap@28bd01071fd5",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.2d.tilemap@28bd01071fd5",
       "fingerprint": "28bd01071fd506c5971fc0dec78c4d32c10f1024",
       "editorCompatibility": "2019.2.0a1",
       "version": "1.0.0",
@@ -32,7 +32,7 @@
     "com.unity.ai.navigation@2.0.9": {
       "name": "com.unity.ai.navigation",
       "displayName": "AI Navigation",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.ai.navigation@5218e4bf7edc",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.ai.navigation@5218e4bf7edc",
       "fingerprint": "5218e4bf7edc04fcad4ed3836c1c41aef334b996",
       "editorCompatibility": "6000.0.0a1",
       "version": "2.0.9",
@@ -42,7 +42,7 @@
     "com.unity.collab-proxy@2.10.2": {
       "name": "com.unity.collab-proxy",
       "displayName": "Unity Version Control",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.collab-proxy@3351acaba9c9",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.collab-proxy@3351acaba9c9",
       "fingerprint": "3351acaba9c9f7fc41d4b2404fc11c55d01ab0ad",
       "editorCompatibility": "2021.3.0f1",
       "version": "2.10.2",
@@ -52,7 +52,7 @@
     "com.unity.ide.rider@3.0.38": {
       "name": "com.unity.ide.rider",
       "displayName": "JetBrains Rider Editor",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.ide.rider@1f60b3138684",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.ide.rider@1f60b3138684",
       "fingerprint": "1f60b3138684c97af67aa8d911b1632ba916d29d",
       "editorCompatibility": "2021.3.0a1",
       "version": "3.0.38",
@@ -62,7 +62,7 @@
     "com.unity.ide.visualstudio@2.0.25": {
       "name": "com.unity.ide.visualstudio",
       "displayName": "Visual Studio Editor",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.ide.visualstudio@74aa435fc4bb",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.ide.visualstudio@74aa435fc4bb",
       "fingerprint": "74aa435fc4bb41890f400130ec80f271d1292fd4",
       "editorCompatibility": "2021.3.0a1",
       "version": "2.0.25",
@@ -72,7 +72,7 @@
     "com.unity.ide.vscode@1.1.4": {
       "name": "com.unity.ide.vscode",
       "displayName": "Visual Studio Code Editor",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.ide.vscode@1a4cb8baed51",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.ide.vscode@1a4cb8baed51",
       "fingerprint": "1a4cb8baed5112216a5206ec440095cd28ddd577",
       "editorCompatibility": "2019.2.0a12",
       "version": "1.1.4",
@@ -82,7 +82,7 @@
     "com.unity.multiplayer.center@1.0.1": {
       "name": "com.unity.multiplayer.center",
       "displayName": "Multiplayer Center",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.multiplayer.center@f01f4ba8d00a",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.multiplayer.center@f01f4ba8d00a",
       "fingerprint": "f01f4ba8d00afa4e957bddf0fcd1612a564401ff",
       "editorCompatibility": "6000.0.0a1",
       "version": "1.0.1",
@@ -92,7 +92,7 @@
     "com.unity.test-framework@1.6.0": {
       "name": "com.unity.test-framework",
       "displayName": "Test Framework",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.test-framework@0b7a23ab2e1d",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.test-framework@0b7a23ab2e1d",
       "fingerprint": "0b7a23ab2e1d74441a5afdffa63f417929756957",
       "editorCompatibility": "6000.0.44f1",
       "version": "1.6.0",
@@ -102,7 +102,7 @@
     "com.unity.timeline@1.8.9": {
       "name": "com.unity.timeline",
       "displayName": "Timeline",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.timeline@6b9e48457ddb",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.timeline@6b9e48457ddb",
       "fingerprint": "6b9e48457ddb4f64813d77fd77efc79a8f3102ae",
       "editorCompatibility": "2021.3.0a1",
       "version": "1.8.9",
@@ -112,7 +112,7 @@
     "com.unity.ugui@2.0.0": {
       "name": "com.unity.ugui",
       "displayName": "Unity UI",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.ugui@8141084bceb4",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.ugui@8141084bceb4",
       "fingerprint": "8141084bceb402471a72a9e377bd7071c03baca1",
       "editorCompatibility": "2019.2.0a1",
       "version": "2.0.0",
@@ -410,7 +410,7 @@
     "com.unity.ext.nunit@2.0.5": {
       "name": "com.unity.ext.nunit",
       "displayName": "Custom NUnit",
-      "resolvedPath": "C:\\Users\\nikde\\Documents\\faks\\Power-up-sah\\Library\\PackageCache\\com.unity.ext.nunit@d8c07649098d",
+      "resolvedPath": "C:\\Users\\Klemen\\Desktop\\Pumpkin\\Power-up-sah\\Library\\PackageCache\\com.unity.ext.nunit@d8c07649098d",
       "fingerprint": "d8c07649098d3936da4c8ab500960c1776b44592",
       "editorCompatibility": "2019.4.0a1",
       "version": "2.0.5",
