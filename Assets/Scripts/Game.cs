@@ -16,6 +16,10 @@ public class Game : MonoBehaviour
     [SerializeField] private Text turnText;             // Prefer assigning in Inspector; fallback is by tag
     [SerializeField] private Text endWinnerText;
     [SerializeField] private ScoreUI scoreUI;
+    [SerializeField] private MoveLogger moveLogger;
+    [SerializeField] private CapturedPiecesUI capturedUI;
+
+
 
 
     private GameObject[,] positions = new GameObject[8, 8];
@@ -293,6 +297,10 @@ public class Game : MonoBehaviour
         boardInitialized = true;
 
         UpdateTurnText();
+        moveLogger?.Clear();
+        capturedUI?.Clear();
+
+
     }
 
     private void ShowStartState()
@@ -356,6 +364,23 @@ public class Game : MonoBehaviour
         playerBlack = new GameObject[16];
         boardInitialized = false;
     }
+    
+    public void OnPieceCaptured(GameObject piece)
+    {
+        if (!piece) return;
+
+        var cm = piece.GetComponent<Chessman>();
+        if (!cm) return;
+
+        bool capturedWasWhite = cm.name.StartsWith("white_");   // <-- MANJKA TI TO
+
+        var sr = piece.GetComponent<SpriteRenderer>();
+        if (sr && sr.sprite)
+            capturedUI?.AddCaptured(capturedWasWhite, sr.sprite);
+    }
+
+
+
 
     public GameObject Create(string name, int x, int y)
     {
@@ -421,6 +446,12 @@ public class Game : MonoBehaviour
         currentPlayer = (currentPlayer == "white") ? "black" : "white";
         UpdateTurnText();
     }
+    
+    public void LogMove(bool whiteMove, int fromX, int fromY, int toX, int toY)
+    {
+        moveLogger?.Log(whiteMove, fromX, fromY, toX, toY);
+    }
+
 
     public void resetMovesPowerUp()
     {
@@ -545,6 +576,7 @@ public class Game : MonoBehaviour
             bool capturedKing = (capturedName == "white_king" || capturedName == "black_king");
 
             SetPositionEmpty(m.toX, m.toY);
+            OnPieceCaptured(toObj);
             Destroy(toObj);
 
             if (capturedKing)
@@ -562,7 +594,11 @@ public class Game : MonoBehaviour
         cm.Activate();
 
         SetPosition(fromObj);
+        
+        bool whiteMove = (currentPlayer == "white");
+        LogMove(whiteMove, m.fromX, m.fromY, m.toX, m.toY);
 
+        
         NextTurn();
         return true;
     }
