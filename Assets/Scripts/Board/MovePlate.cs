@@ -58,7 +58,6 @@ public class MovePlate : MonoBehaviour
         
         
         // >>> LOG HERE <<<
-        g.LogMove(whiteMove, fromX, fromY, toX, toY);
 
 
         if (g.currentPowerUp == 1)

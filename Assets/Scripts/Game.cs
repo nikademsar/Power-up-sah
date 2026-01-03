@@ -16,8 +16,9 @@ public class Game : MonoBehaviour
     [SerializeField] private Text turnText;             // Prefer assigning in Inspector; fallback is by tag
     [SerializeField] private Text endWinnerText;
     [SerializeField] private ScoreUI scoreUI;
-    [SerializeField] private MoveLogger moveLogger;
     [SerializeField] private CapturedPiecesUI capturedUI;
+    [SerializeField] private MoveLoggerSimple moveLogger;
+
 
 
 
@@ -297,9 +298,8 @@ public class Game : MonoBehaviour
         boardInitialized = true;
 
         UpdateTurnText();
-        moveLogger?.Clear();
         capturedUI?.Clear();
-
+        moveLogger?.Clear();
 
     }
 
@@ -447,10 +447,7 @@ public class Game : MonoBehaviour
         UpdateTurnText();
     }
     
-    public void LogMove(bool whiteMove, int fromX, int fromY, int toX, int toY)
-    {
-        moveLogger?.Log(whiteMove, fromX, fromY, toX, toY);
-    }
+
 
 
     public void resetMovesPowerUp()
@@ -558,7 +555,9 @@ public class Game : MonoBehaviour
         if (fromObj == null) return false;
 
         var toObj = GetPosition(m.toX, m.toY);
+        bool isCapture = (toObj != null);
 
+        
         var fromName = fromObj.GetComponent<Chessman>().name;
         if (toObj != null)
         {
@@ -595,8 +594,11 @@ public class Game : MonoBehaviour
 
         SetPosition(fromObj);
         
-        bool whiteMove = (currentPlayer == "white");
-        LogMove(whiteMove, m.fromX, m.fromY, m.toX, m.toY);
+        moveLogger?.LogCoords(m.fromX, m.fromY, m.toX, m.toY);
+        
+        string from = MoveLoggerSimple.ToSquare(m.fromX, m.fromY);
+        string to = MoveLoggerSimple.ToSquare(m.toX, m.toY);
+        moveLogger?.Log(isCapture ? $"{from}x{to}" : $"{from}-{to}");
 
         
         NextTurn();
