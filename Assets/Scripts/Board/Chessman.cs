@@ -34,16 +34,16 @@ public class Chessman : MonoBehaviour
         //Choose correct sprite based on piece's name
         switch (this.name)
         {
-            case"Double_Colored": this.GetComponent<SpriteRenderer>().sprite = Double_Colored; player = "black"; break;
-            case"Double_Grey": this.GetComponent<SpriteRenderer>().sprite = Double_Grey; player = "black"; break;
-            case"Pawn_Grey": this.GetComponent<SpriteRenderer>().sprite = Pawn_Grey; player = "black"; break;
-            case"Pawn_Colored": this.GetComponent<SpriteRenderer>().sprite = Pawn_Colored; player = "black"; break;
-            case"Switch_Colored": this.GetComponent<SpriteRenderer>().sprite = Switch_Colored; player = "black"; break;
-            case"Switch_Grey": this.GetComponent<SpriteRenderer>().sprite = Switch_Grey; player = "black"; break;
-            case"Upgrade_Grey": this.GetComponent<SpriteRenderer>().sprite = Upgrade_Grey; player = "black"; break;
-            case"Upgrade_Colored": this.GetComponent<SpriteRenderer>().sprite = Upgrade_Colored; player = "black"; break;
-            case"QueenP_Colored": this.GetComponent<SpriteRenderer>().sprite = QueenP_Colored; player = "black"; break;
-            case"QueenP_Grey": this.GetComponent<SpriteRenderer>().sprite = QueenP_Grey; player = "black"; break;
+            case"Double_Colored": this.GetComponent<SpriteRenderer>().sprite = Double_Colored; player = "white"; break;
+            case"Double_Grey": this.GetComponent<SpriteRenderer>().sprite = Double_Grey; player = "white"; break;
+            case"Pawn_Grey": this.GetComponent<SpriteRenderer>().sprite = Pawn_Grey; player = "white"; break;
+            case"Pawn_Colored": this.GetComponent<SpriteRenderer>().sprite = Pawn_Colored; player = "white"; break;
+            case"Switch_Colored": this.GetComponent<SpriteRenderer>().sprite = Switch_Colored; player = "white"; break;
+            case"Switch_Grey": this.GetComponent<SpriteRenderer>().sprite = Switch_Grey; player = "white"; break;
+            case"Upgrade_Grey": this.GetComponent<SpriteRenderer>().sprite = Upgrade_Grey; player = "white"; break;
+            case"Upgrade_Colored": this.GetComponent<SpriteRenderer>().sprite = Upgrade_Colored; player = "white"; break;
+            case"QueenP_Colored": this.GetComponent<SpriteRenderer>().sprite = QueenP_Colored; player = "white"; break;
+            case"QueenP_Grey": this.GetComponent<SpriteRenderer>().sprite = QueenP_Grey; player = "white"; break;
 
             case "black_queen": this.GetComponent<SpriteRenderer>().sprite = black_queen; player = "black"; break;
             case "black_knight": this.GetComponent<SpriteRenderer>().sprite = black_knight; player = "black"; break;

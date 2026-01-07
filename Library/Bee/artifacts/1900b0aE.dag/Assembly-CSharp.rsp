@@ -431,6 +431,7 @@
 "Assets/Scripts/GameSettings.cs"
 "Assets/Scripts/MoveLoggerSimple.cs"
 "Assets/Scripts/MoveRowUI.cs"
+"Assets/Scripts/PowerUpButton.cs"
 "Assets/Scripts/ScoreManager.cs"
 "Assets/Scripts/Themes/Black.cs"
 "Assets/Scripts/Themes/Blue.cs"

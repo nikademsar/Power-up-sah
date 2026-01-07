@@ -17,6 +17,10 @@ namespace PowerUpChess.Engine
         BK = -6    // crn kralj
     }
 
+
+
+    
+
     public struct Move
     {
         public int fromX, fromY, toX, toY;
