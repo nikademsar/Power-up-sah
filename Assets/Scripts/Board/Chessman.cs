@@ -64,25 +64,10 @@ public class Chessman : MonoBehaviour
         this.transform.position = new Vector3(x, y, -1.0f);
     }
 
-    public int GetXBoard()
-    {
-        return xBoard;
-    }
-
-    public int GetYBoard()
-    {
-        return yBoard;
-    }
-
-    public void SetXBoard(int x)
-    {
-        xBoard = x;
-    }
-
-    public void SetYBoard(int y)
-    {
-        yBoard = y;
-    }
+    public int GetXBoard() { return xBoard; }
+    public int GetYBoard() { return yBoard; }
+    public void SetXBoard(int x) { xBoard = x; }
+    public void SetYBoard(int y) { yBoard = y; }
 
     private void OnMouseUp()
     {
@@ -108,7 +93,7 @@ public class Chessman : MonoBehaviour
                 g.NextTurn();
             }
 
-            return; 
+            return;
         }
 
         if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
@@ -127,28 +112,22 @@ public class Chessman : MonoBehaviour
         GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
         for (int i = 0; i < movePlates.Length; i++)
         {
-            Destroy(movePlates[i]); //Be careful with this function "Destroy" it is asynchronous
+            Destroy(movePlates[i]); // Destroy is asynchronous
         }
     }
 
     public void InitiateMovePlates()
     {
-
         Game g = controller.GetComponent<Game>();
 
-        //powerup 2
+        // powerup 2: opponent restricted to pawn movement
         bool restrictedToPawnMovement = (g.currentPowerUp == 2) && (g.powerUpPlayer != player);
 
         switch (this.name)
         {
             case "black_queen":
             case "white_queen":
-                if (restrictedToPawnMovement)
-                {
-                    PawnLikeMovement();
-                    break;
-                }
-
+                if (restrictedToPawnMovement) { PawnLikeMovement(); break; }
                 LineMovePlate(1, 0);
                 LineMovePlate(0, 1);
                 LineMovePlate(1, 1);
@@ -158,53 +137,40 @@ public class Chessman : MonoBehaviour
                 LineMovePlate(-1, 1);
                 LineMovePlate(1, -1);
                 break;
+
             case "black_knight":
             case "white_knight":
-                if (restrictedToPawnMovement)
-                {
-                    PawnLikeMovement();
-                    break;
-                }
-
+                if (restrictedToPawnMovement) { PawnLikeMovement(); break; }
                 LMovePlate();
                 break;
+
             case "black_bishop":
             case "white_bishop":
-                if (restrictedToPawnMovement)
-                {
-                    PawnLikeMovement();
-                    break;
-                }
-
+                if (restrictedToPawnMovement) { PawnLikeMovement(); break; }
                 LineMovePlate(1, 1);
                 LineMovePlate(1, -1);
                 LineMovePlate(-1, 1);
                 LineMovePlate(-1, -1);
                 break;
+
             case "black_king":
             case "white_king":
-                if (restrictedToPawnMovement)
-                {
-                    PawnLikeMovement();
-                    break;
-                }
+                if (restrictedToPawnMovement) { PawnLikeMovement(); break; }
                 SurroundMovePlate();
                 break;
+
             case "black_rook":
             case "white_rook":
-                if (restrictedToPawnMovement)
-                {
-                    PawnLikeMovement();
-                    break;
-                }
+                if (restrictedToPawnMovement) { PawnLikeMovement(); break; }
                 LineMovePlate(1, 0);
                 LineMovePlate(0, 1);
                 LineMovePlate(-1, 0);
                 LineMovePlate(0, -1);
                 break;
+
             case "black_pawn":
             case "white_pawn":
-                // powerup 1
+                // powerup 1: pawn moves like a queen (as you already had)
                 if (g.currentPowerUp == 1 && g.powerUpPlayer == player)
                 {
                     LineMovePlate(1, 0);
@@ -218,22 +184,18 @@ public class Chessman : MonoBehaviour
                 }
                 else
                 {
-                    // normal pawn behavior
-                    if (player == "white")
-                        PawnMovePlate(xBoard, yBoard + 1);
-                    else
-                        PawnMovePlate(xBoard, yBoard - 1);
+                    // normal pawn behavior (WITH initial 2-step + captures)
+                    PawnMovePlates();
                 }
                 break;
         }
     }
 
+    // Pawn-like movement now uses the same pawn logic (forward + diagonal captures + initial 2-step)
     void PawnLikeMovement()
     {
-        int direction = (player == "white") ? 1 : -1;
-        PawnMovePlate(xBoard, yBoard + direction);
+        PawnMovePlates();
     }
-
 
     public void LineMovePlate(int xIncrement, int yIncrement)
     {
@@ -297,43 +259,61 @@ public class Chessman : MonoBehaviour
         }
     }
 
-    public void PawnMovePlate(int x, int y)
+    // NEW: full pawn logic: 1-step, 2-step from start, diagonal captures
+    private void PawnMovePlates()
     {
         Game sc = controller.GetComponent<Game>();
-        if (sc.PositionOnBoard(x, y))
+
+        int dir = (player == "white") ? 1 : -1;
+        int startRank = (player == "white") ? 1 : 6;
+
+        int x = xBoard;
+        int y1 = yBoard + dir;
+
+        // forward 1 (must be empty)
+        if (sc.PositionOnBoard(x, y1) && sc.GetPosition(x, y1) == null)
         {
-            if (sc.GetPosition(x, y) == null)
-            {
-                MovePlateSpawn(x, y);
-            }
+            MovePlateSpawn(x, y1);
 
-            if (sc.PositionOnBoard(x + 1, y) && sc.GetPosition(x + 1, y) != null && sc.GetPosition(x + 1, y).GetComponent<Chessman>().player != player)
+            // forward 2 from starting rank (both squares must be empty)
+            int y2 = yBoard + 2 * dir;
+            if (yBoard == startRank && sc.PositionOnBoard(x, y2) && sc.GetPosition(x, y2) == null)
             {
-                MovePlateAttackSpawn(x + 1, y);
+                MovePlateSpawn(x, y2);
             }
+        }
 
-            if (sc.PositionOnBoard(x - 1, y) && sc.GetPosition(x - 1, y) != null && sc.GetPosition(x - 1, y).GetComponent<Chessman>().player != player)
-            {
-                MovePlateAttackSpawn(x - 1, y);
-            }
+        // diagonal captures
+        int capY = yBoard + dir;
+
+        int capX1 = xBoard + 1;
+        if (sc.PositionOnBoard(capX1, capY))
+        {
+            var t = sc.GetPosition(capX1, capY);
+            if (t != null && t.GetComponent<Chessman>().player != player)
+                MovePlateAttackSpawn(capX1, capY);
+        }
+
+        int capX2 = xBoard - 1;
+        if (sc.PositionOnBoard(capX2, capY))
+        {
+            var t = sc.GetPosition(capX2, capY);
+            if (t != null && t.GetComponent<Chessman>().player != player)
+                MovePlateAttackSpawn(capX2, capY);
         }
     }
 
     public void MovePlateSpawn(int matrixX, int matrixY)
     {
-        //Get the board value in order to convert to xy coords
         float x = matrixX;
         float y = matrixY;
 
-        //Adjust by variable offset
         x *= 0.66f;
         y *= 0.66f;
 
-        //Add constants (pos 0,0)
         x += -2.3f;
         y += -2.3f;
 
-        //Set actual unity values
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
 
         MovePlate mpScript = mp.GetComponent<MovePlate>();
@@ -343,19 +323,15 @@ public class Chessman : MonoBehaviour
 
     public void MovePlateAttackSpawn(int matrixX, int matrixY)
     {
-        //Get the board value in order to convert to xy coords
         float x = matrixX;
         float y = matrixY;
 
-        //Adjust by variable offset
         x *= 0.66f;
         y *= 0.66f;
 
-        //Add constants (pos 0,0)
         x += -2.3f;
         y += -2.3f;
 
-        //Set actual unity values
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
 
         MovePlate mpScript = mp.GetComponent<MovePlate>();

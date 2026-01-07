@@ -28,12 +28,15 @@ public class SettingsUI : MonoBehaviour
 
     public void OnAnySettingChanged()
     {
+        Debug.Log("Before: toggle=" + vsBotToggle.isOn + " prefs=" + GameSettings.VsBot);
+
         if (vsBotToggle != null) GameSettings.VsBot = vsBotToggle.isOn;
-        if (depthSlider != null) GameSettings.Depth = Mathf.RoundToInt(depthSlider.value);
-        if (botPlaysBlackToggle != null) GameSettings.BotPlaysBlack = botPlaysBlackToggle.isOn;
+
+        Debug.Log("After:  toggle=" + vsBotToggle.isOn + " prefs=" + GameSettings.VsBot);
 
         ApplyToBot();
     }
+
 
     private void ApplyToBot()
     {
