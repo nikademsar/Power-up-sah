@@ -69,8 +69,14 @@ private void OnEnable()
 
         if (vsBotToggle != null) GameSettings.VsBot = vsBotToggle.isOn;
 
+        if (difficultyDropdown == null) return;
+
         Dropdown dd = difficultyDropdown.GetComponent<Dropdown>();
+        if (dd == null) return;
+
         int index = dd.value;
+
+
 
         GameSettings.Depth = difficultyDepth[index];
 

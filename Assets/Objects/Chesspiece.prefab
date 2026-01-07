@@ -120,6 +120,26 @@ MonoBehaviour:
   white_king: {fileID: 21300000, guid: 2648b481cac0d574fb94e5c49b2b2130, type: 3}
   white_rook: {fileID: 21300000, guid: fa0a2ff3626721748bf657c7c6022e11, type: 3}
   white_pawn: {fileID: 21300000, guid: da81633aa03645145ae1b41587366583, type: 3}
+  Double_Colored: {fileID: 3926179688764264100, guid: 6769b52575bbaf340b8d0626fdf52d20,
+    type: 3}
+  Pawn_Colored: {fileID: 7368993821091348724, guid: 26319d1401827b340b3aca4b73c4a5d5,
+    type: 3}
+  QueenP_Colored: {fileID: -666058201605299863, guid: 5880e562387363f4396fa11180ccf7e3,
+    type: 3}
+  Switch_Colored: {fileID: 4219500272906064375, guid: 83ca635338fa62b46b4372cd2c8dec57,
+    type: 3}
+  Upgrade_Colored: {fileID: 3210790750536573273, guid: 8e66167cff6c6f84d8556efc392e584c,
+    type: 3}
+  Double_Grey: {fileID: -8828078329741074364, guid: 7029d474d9cd5754781b8d7e3d16bd7f,
+    type: 3}
+  Pawn_Grey: {fileID: 8349250127876897470, guid: c75343c85607f1843881a3e5f0f2eca7,
+    type: 3}
+  QueenP_Grey: {fileID: -3970945488181297620, guid: e8c036a20382942448b6b1b87e976a44,
+    type: 3}
+  Switch_Grey: {fileID: -1101320106115652820, guid: dd0be56a83abfd2449f5745e93076151,
+    type: 3}
+  Upgrade_Grey: {fileID: 9216293828967776512, guid: bedc8a1cd6f251041b0f0f5578514a64,
+    type: 3}
 --- !u!61 &7068999908475216718
 BoxCollider2D:
   m_ObjectHideFlags: 0
