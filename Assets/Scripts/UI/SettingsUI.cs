@@ -7,27 +7,61 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private GameBot bot;
 
     [SerializeField] private Toggle vsBotToggle;
-    [SerializeField] private TMP_Dropdown difficultyDropdown;
+    [SerializeField] private GameObject difficultyDropdown;
     [SerializeField] private Toggle botPlaysBlackToggle;
+    [SerializeField] private Text difficultyText;
+    public static bool DifficultyChosen = false;
 
 
-    private int[] difficultyDepth = {3, 5, 7};
+
+
+    private int[] difficultyDepth = {3, 4, 7};
+
+
+public void SetDifficultyIndex(int index)
+{
+    DifficultyChosen = true;
+    GameSettings.Depth = difficultyDepth[index];
+
+    if (difficultyText != null)
+        difficultyText.text = index == 0 ? "Easy" : index == 1 ? "Medium" : "Hard";
+
+    ApplyToBot();
+}
 
 
 
-    public void OnEnable()
+
+private void OnEnable()
+{
+    if (vsBotToggle != null)
+        vsBotToggle.isOn = GameSettings.VsBot;
+
+    if (difficultyDropdown != null)
     {
-
-        if (vsBotToggle != null) vsBotToggle.isOn = GameSettings.VsBot;
-
-        if (difficultyDropdown != null)
-            difficultyDropdown.value = DropdownIndexFromDepth(GameSettings.Depth);
-            
-
-        if (botPlaysBlackToggle != null) botPlaysBlackToggle.isOn = GameSettings.BotPlaysBlack;
-
-        ApplyToBot();
+        var dd = difficultyDropdown.GetComponent<Dropdown>();
+        if (dd != null)
+            dd.value = DropdownIndexFromDepth(GameSettings.Depth);
     }
+
+    if (difficultyText != null)
+    {
+        if (!DifficultyChosen)
+            difficultyText.text = "Difficulty";
+        else
+        {
+            int idx = DropdownIndexFromDepth(GameSettings.Depth);
+            difficultyText.text = idx == 0 ? "Easy" : idx == 1 ? "Medium" : "Hard";
+        }
+    }
+
+    if (botPlaysBlackToggle != null)
+        botPlaysBlackToggle.isOn = GameSettings.BotPlaysBlack;
+
+    ApplyToBot();
+}
+
+
 
     public void OnAnySettingChanged()
     {
@@ -35,8 +69,13 @@ public class SettingsUI : MonoBehaviour
 
         if (vsBotToggle != null) GameSettings.VsBot = vsBotToggle.isOn;
 
-         if (difficultyDropdown != null)
-            GameSettings.Depth = difficultyDepth[difficultyDropdown.value];
+        Dropdown dd = difficultyDropdown.GetComponent<Dropdown>();
+        int index = dd.value;
+
+        GameSettings.Depth = difficultyDepth[index];
+
+        Debug.Log("Dropdown index: " + index);
+
 
         Debug.Log("After:  toggle=" + vsBotToggle.isOn + " prefs=" + GameSettings.VsBot);
 
@@ -61,6 +100,6 @@ public class SettingsUI : MonoBehaviour
         for (int i = 0; i < difficultyDepth.Length; i++)
             if (difficultyDepth[i] == depth) return i;
 
-        return 0;
+        return 3;
     }
 }
