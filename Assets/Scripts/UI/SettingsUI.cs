@@ -1,25 +1,28 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingsUI : MonoBehaviour
 {
     [SerializeField] private GameBot bot;
 
     [SerializeField] private Toggle vsBotToggle;
-    [SerializeField] private Slider depthSlider;
+    [SerializeField] private TMP_Dropdown difficultyDropdown;
     [SerializeField] private Toggle botPlaysBlackToggle;
 
-    private void OnEnable()
+
+    private int[] difficultyDepth = {3, 5, 7};
+
+
+
+    public void OnEnable()
     {
+
         if (vsBotToggle != null) vsBotToggle.isOn = GameSettings.VsBot;
 
-        if (depthSlider != null)
-        {
-            depthSlider.minValue = 3;
-            depthSlider.maxValue = 7;
-            depthSlider.wholeNumbers = true;
-            depthSlider.value = GameSettings.Depth;
-        }
+        if (difficultyDropdown != null)
+            difficultyDropdown.value = DropdownIndexFromDepth(GameSettings.Depth);
+            
 
         if (botPlaysBlackToggle != null) botPlaysBlackToggle.isOn = GameSettings.BotPlaysBlack;
 
@@ -31,6 +34,9 @@ public class SettingsUI : MonoBehaviour
         Debug.Log("Before: toggle=" + vsBotToggle.isOn + " prefs=" + GameSettings.VsBot);
 
         if (vsBotToggle != null) GameSettings.VsBot = vsBotToggle.isOn;
+
+         if (difficultyDropdown != null)
+            GameSettings.Depth = difficultyDepth[difficultyDropdown.value];
 
         Debug.Log("After:  toggle=" + vsBotToggle.isOn + " prefs=" + GameSettings.VsBot);
 
@@ -47,5 +53,14 @@ public class SettingsUI : MonoBehaviour
 
         bot.botPlaysBlack = GameSettings.BotPlaysBlack;
         bot.botPlaysWhite = !GameSettings.BotPlaysBlack;
+    }
+
+
+        private int DropdownIndexFromDepth(int depth)
+    {
+        for (int i = 0; i < difficultyDepth.Length; i++)
+            if (difficultyDepth[i] == depth) return i;
+
+        return 0;
     }
 }
