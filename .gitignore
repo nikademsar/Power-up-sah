@@ -5,10 +5,17 @@
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
+MemoryCaptures/
 *.csproj
 *.sln
-*.userprefs
+*.user
+*.unityproj
+*.pidb
+*.booproj
+*.svd
+*.pdb
 .DS_Store
+.vscode/
 .vs/
 .idea/
 
