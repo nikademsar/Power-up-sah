@@ -1,25 +1,25 @@
 m_ProjectFiles:
   m_ManifestFileStatus:
-    m_FilePath: C:/Users/Klemen/Desktop/chu/Power-up-sah/Packages/manifest.json
+    m_FilePath: C:/Users/Klemen/Desktop/love me/Power-up-sah/Packages/manifest.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639033977994637995
+      ticks: 639034888201009982
     m_Hash: 1811069001
   m_LockFileStatus:
-    m_FilePath: C:/Users/Klemen/Desktop/chu/Power-up-sah/Packages/packages-lock.json
+    m_FilePath: C:/Users/Klemen/Desktop/love me/Power-up-sah/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639033977994637995
+      ticks: 639034888201009982
     m_Hash: 3166488150
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
-m_ProjectPath: C:/Users/Klemen/Desktop/chu/Power-up-sah/Packages
+m_ProjectPath: C:/Users/Klemen/Desktop/love me/Power-up-sah/Packages
 m_EditorVersion: 6000.3.1f1 (37142da19a94)
 m_ResolvedPackages:
 - packageId: com.unity.2d.sprite@1.0.0
@@ -27,7 +27,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.2d.sprite@82f01c8c75ca
   assetPath: Packages/com.unity.2d.sprite
   name: com.unity.2d.sprite
   displayName: 2D Sprite
@@ -107,7 +107,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.2d.tilemap@28bd01071fd5
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.2d.tilemap@28bd01071fd5
   assetPath: Packages/com.unity.2d.tilemap
   name: com.unity.2d.tilemap
   displayName: 2D Tilemap Editor
@@ -206,7 +206,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.9
   source: 1
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.ai.navigation@5218e4bf7edc
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.ai.navigation@5218e4bf7edc
   assetPath: Packages/com.unity.ai.navigation
   name: com.unity.ai.navigation
   displayName: AI Navigation
@@ -339,7 +339,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.10.2
   source: 1
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.collab-proxy@3351acaba9c9
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.collab-proxy@3351acaba9c9
   assetPath: Packages/com.unity.collab-proxy
   name: com.unity.collab-proxy
   displayName: Unity Version Control
@@ -522,7 +522,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 3.0.38
   source: 1
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.ide.rider@1f60b3138684
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.ide.rider@1f60b3138684
   assetPath: Packages/com.unity.ide.rider
   name: com.unity.ide.rider
   displayName: JetBrains Rider Editor
@@ -653,7 +653,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.25
   source: 1
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.ide.visualstudio@74aa435fc4bb
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.ide.visualstudio@74aa435fc4bb
   assetPath: Packages/com.unity.ide.visualstudio
   name: com.unity.ide.visualstudio
   displayName: Visual Studio Editor
@@ -769,7 +769,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.1.4
   source: 1
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.ide.vscode@1a4cb8baed51
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.ide.vscode@1a4cb8baed51
   assetPath: Packages/com.unity.ide.vscode
   name: com.unity.ide.vscode
   displayName: Visual Studio Code Editor
@@ -872,7 +872,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.1
   source: 2
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.multiplayer.center@f01f4ba8d00a
   assetPath: Packages/com.unity.multiplayer.center
   name: com.unity.multiplayer.center
   displayName: Multiplayer Center
@@ -968,7 +968,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.6.0
   source: 2
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.test-framework@0b7a23ab2e1d
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.test-framework@0b7a23ab2e1d
   assetPath: Packages/com.unity.test-framework
   name: com.unity.test-framework
   displayName: Test Framework
@@ -1058,7 +1058,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.8.9
   source: 1
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.timeline@6b9e48457ddb
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.timeline@6b9e48457ddb
   assetPath: Packages/com.unity.timeline
   name: com.unity.timeline
   displayName: Timeline
@@ -1258,7 +1258,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.0
   source: 2
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.ugui@8141084bceb4
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.ugui@8141084bceb4
   assetPath: Packages/com.unity.ugui
   name: com.unity.ugui
   displayName: Unity UI
@@ -4299,7 +4299,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.5
   source: 2
-  resolvedPath: C:\Users\Klemen\Desktop\chu\Power-up-sah\Library\PackageCache\com.unity.ext.nunit@d8c07649098d
+  resolvedPath: C:\Users\Klemen\Desktop\love me\Power-up-sah\Library\PackageCache\com.unity.ext.nunit@d8c07649098d
   assetPath: Packages/com.unity.ext.nunit
   name: com.unity.ext.nunit
   displayName: Custom NUnit
