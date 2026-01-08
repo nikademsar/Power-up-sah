@@ -4,9 +4,8 @@ using UnityEngine.UI;
 public class PowerUpButton : MonoBehaviour
 {
     [Header("Setup")]
-    public int powerUpIndex;              // 0–4
     public Game game;                     // reference na Game
-
+    public GameObject controller;
     [Header("Visuals")]
     public Sprite greySprite;
     public Sprite activeSprite;
@@ -44,22 +43,66 @@ public class PowerUpButton : MonoBehaviour
             btn.interactable = active;
     }
 
+    private Game getGame()
+    {
+        return GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>();
+    }
+
+
+    public void doubleMoveBtnOnClick()
+    {
+        Game g = getGame();
+        string player = g.GetCurrentPlayer();
+
+        g.ActivateDoubleMovePowerUp(player);
+
+        SetActive(false);
+    }
+
+    public void pawnQueenBtnOnClick()
+    {
+        Game g = getGame();
+        string player = g.GetCurrentPlayer();
+
+        g.ActivatePawnQueenPowerUp(player);
+
+        SetActive(false);
+    }
+
+    public void restrictToPawnBtnOnClick()
+    {
+        Game g = getGame();
+        string player = g.GetCurrentPlayer();
+
+        g.ActivateRestrictToPawnPowerUp(player);
+
+        SetActive(false);
+    }
+
+    public void upgradeBtnOnClick()
+    {
+
+        Game g = getGame();
+        string player = g.GetCurrentPlayer();
+
+        g.ActivatePawnUpgradePowerUp(player);
+
+        SetActive(false);
+    }
+
+    public void swapBtnOnClick()
+    {
+        Game g = getGame();
+        string player = g.GetCurrentPlayer();
+
+        g.ActivateSwapPowerUp(player);
+
+        SetActive(false);
+    }
+
+
     public void OnClick()
     {
-        if (game == null) return;
 
-        string player = game.GetCurrentPlayer();
-
-        switch (powerUpIndex)
-        {
-            case 0: game.ActivateDoubleMovePowerUp(player); break;
-            case 1: game.ActivatePawnQueenPowerUp(player); break;
-            case 2: game.ActivateRestrictToPawnPowerUp(player); break;
-            case 3: game.ActivatePawnUpgradePowerUp(player); break;
-            case 4: game.ActivateSwapPowerUp(player); break;
-        }
-
-        // po uporabi -> disable
-        SetActive(false);
     }
 }
