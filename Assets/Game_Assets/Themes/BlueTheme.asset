@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fbd29d8f36d2074b8655c998b86283e, type: 3}
+  m_Name: BlueTheme
+  m_EditorClassIdentifier: Assembly-CSharp::ChessSpriteTheme
+  board: {fileID: 8228984018995571795, guid: b228c43dc4f65c2408364ddd6d3ed7fb, type: 3}
+  white_king: {fileID: 1112119386570184743, guid: 3baf2181f0556b9468c15461988b4fc6,
+    type: 3}
+  white_queen: {fileID: 9085289559516715946, guid: 29043b3d5eb81d44684f9f74909f602d,
+    type: 3}
+  white_rook: {fileID: -823655876900806365, guid: 523ce06ec00cdc9478174735fa8180cd,
+    type: 3}
+  white_bishop: {fileID: 1532734197027712362, guid: 59fcf1118d9e9dd42aec1b81f9974ae0,
+    type: 3}
+  white_knight: {fileID: -902373627494334116, guid: be2176d08d00b794a91f63cd7508193c,
+    type: 3}
+  white_pawn: {fileID: 7741372821504390831, guid: 6c785c6382b4b1b4b802c54afac780ad,
+    type: 3}
+  black_king: {fileID: -8637554199535971330, guid: 12eee24fd85b38447b5df45669b04a2e,
+    type: 3}
+  black_queen: {fileID: -6610272620332661808, guid: cf46f1990d836d84984434d8f5f70635,
+    type: 3}
+  black_rook: {fileID: 8068770321704374098, guid: f8846d9d0ca07f343a666a29d3b4e593,
+    type: 3}
+  black_bishop: {fileID: -9129240478068152403, guid: c098c34069c840646b3cc7e3ef43904b,
+    type: 3}
+  black_knight: {fileID: -6483499953654539438, guid: 3a6556df5445f7d4bbb13ea91ee6af83,
+    type: 3}
+  black_pawn: {fileID: -6816955929696691276, guid: 677e08d090e35dd4da43d46bbb0573c2,
+    type: 3}
