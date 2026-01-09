@@ -4,7 +4,11 @@
 
 **Šah+** je računalniška šahovska aplikacija, razvita v okolju **Unity** z uporabo programskega jezika **C#**. Aplikacija temelji na klasičnih pravilih šaha, hkrati pa omogoča sodobnejšo uporabniško izkušnjo z integriranim uporabniškim vmesnikom, podporo za igranje proti računalniku in beleženjem rezultatov.
 
-Projekt je bil razvit kot študentski projekt z namenom demonstracije implementacije šahovske logike, osnovnega igralnega bota ter modularne arhitekture igre.
+[https://github.com/nikademsar/Power-up-sah/blob/main/Images/StartPanal.mp4]
+
+[https://github.com/nikademsar/Power-up-sah/blob/main/Images/PowerUps.mp4]
+
+[https://github.com/nikademsar/Power-up-sah/blob/main/Images/EndPanal.png]
 
 ---
 
@@ -32,7 +36,7 @@ Projekt je bil razvit kot študentski projekt z namenom demonstracije implementa
 * Nastavljiva globina iskanja (1–5)
 * Nastavitev strani bota (igra kot beli ali črni)
 
-Power-Upi (Posebne sposobnosti)
+### Power-Upi (Posebne sposobnosti)
 
 * Poleg klasičnih pravil šaha aplikacija Šah+ omogoča uporabo posebnih power-upov, ki igri dodajo več raznolikosti in strateške globine.
 
@@ -57,21 +61,16 @@ Izbranemu kmetu začasno omogoči gibanje po pravilih dame.
 * Nastavitev težavnosti (globina iskanja)
 * Nastavitev barve figur, ki jih igra bot
 * Izbira različnih barvnih tem igre
+* Beleženje zmag belih in črnih
 * Nastavitve se shranjujejo z uporabo `PlayerPrefs`
 
-### Beleženje rezultatov
-
-* Beleženje zmag belih in črnih
-* Trajno shranjevanje rezultatov
-* Prikaz rezultatov v uporabniškem vmesniku
-* Možnost ponastavitve statistike
 
 ### Uporabniški vmesnik
 
 * Začetni meni (Start panel)
 * Končni zaslon z izpisom zmagovalca (End panel)
 * Gumb za ponovni začetek igre
-* Pregleden in enostaven UI, prilagojen namiznim napravam
+* Pregleden in enostaven UI, prilagojen namiznim windows napravam
 
 ---
 
@@ -84,44 +83,9 @@ Izbranemu kmetu začasno omogoči gibanje po pravilih dame.
 
 ---
 
-## Datoteke in moduli
+## APK aplikacije:
+[https://github.com/nikademsar/Power-up-sah/blob/main/Build.zip]
 
-* `Game.cs` – glavna logika igre, upravljanje potez, stanja igre in UI
-* `GameBot.cs` – nadzor nad igranjem proti računalniku
-* `GameSettings.cs` – trajne nastavitve igre
-* `ScoreManager.cs` – beleženje in shranjevanje rezultatov
-* `SettingsUI.cs` – povezava nastavitev z uporabniškim vmesnikom
-* `ScoreUI.cs` – prikaz rezultatov v UI
-
----
-
-## Namestitev in zagon
-
-1. Namesti aplikacijo prek APK datoteke
-2. Zaženi aplikacijo
-3. Izberi način igre (Two Player ali Vs Bot)
-4. Po želji prilagodi nastavitve
-5. Začni igro
-
----
-
-## Povezave
-
-* **APK aplikacije:**
-  👉 *[tukaj dodajte povezavo do APK]*
-
-* **Slike aplikacije:**
-  👉 *[tukaj dodajte povezavo do mape s slikami]*
-
-* **Video predstavitev aplikacije:**
-  👉 *[tukaj dodajte povezavo do videa]*
-
----
-
-## Status projekta
-
-**Zaključeno**
-Implementirana je stabilna različica aplikacije z igranjem proti igralcu in proti računalniku, osnovnim šahovskim pogonom, nastavitvami in beleženjem rezultatov.
 
 ---
 
