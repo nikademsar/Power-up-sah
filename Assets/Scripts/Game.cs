@@ -572,6 +572,7 @@ public class Game : MonoBehaviour
         // (opcijsko: varovalo pred "eat own piece")
         if (isCapture)
         {
+            RegisterPieceLoss(toObj);
             string toName = toObj.GetComponent<Chessman>().name;
             bool fromWhite = fromName.StartsWith("white_");
             bool toWhite = toName.StartsWith("white_");
