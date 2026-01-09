@@ -32,11 +32,31 @@ Projekt je bil razvit kot študentski projekt z namenom demonstracije implementa
 * Nastavljiva globina iskanja (1–5)
 * Nastavitev strani bota (igra kot beli ali črni)
 
+Power-Upi (Posebne sposobnosti)
+
+* Poleg klasičnih pravil šaha aplikacija Šah+ omogoča uporabo posebnih power-upov, ki igri dodajo več raznolikosti in strateške globine.
+
+* Naključna transformacija
+Izbrano figuro (ali kmeta) naključno spremeni v drugo šahovsko figuro.
+
+* Zamenjava (Switch)
+Omogoča zamenjavo položajev dveh poljubno izbranih figur na šahovnici.
+
+* Dvojna poteza (Double Turn)
+Igralcu omogoči, da izvede dve zaporedni potezi.
+
+* Omejitev gibanja na kmeta
+Nasprotnik mora vse svoje figure premikati po pravilih gibanja kmeta.
+
+* Kmet kot dama
+Izbranemu kmetu začasno omogoči gibanje po pravilih dame.
+
 ### Nastavitve igre
 
 * Vklop/izklop igranja proti botu
 * Nastavitev težavnosti (globina iskanja)
 * Nastavitev barve figur, ki jih igra bot
+* Izbira različnih barvnih tem igre
 * Nastavitve se shranjujejo z uporabo `PlayerPrefs`
 
 ### Beleženje rezultatov
