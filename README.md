@@ -4,8 +4,8 @@
 
 **Šah+** je računalniška šahovska aplikacija, razvita v okolju **Unity** z uporabo programskega jezika **C#**. Aplikacija temelji na klasičnih pravilih šaha, hkrati pa omogoča sodobnejšo uporabniško izkušnjo z integriranim uporabniškim vmesnikom, podporo za igranje proti računalniku in beleženjem rezultatov.
 
-![StartPanel](https://github.com/nikademsar/Power-up-sah/blob/main/Images/StartPanal.mp4?raw=true)
-![PowerUps](https://github.com/nikademsar/Power-up-sah/blob/main/Images/PowerUps.mp4?raw=true)
+![StartPanel](https://github.com/nikademsar/Power-up-sah/blob/main/Images/StartPanal.gif?raw=true)
+![PowerUps](https://github.com/nikademsar/Power-up-sah/blob/main/Images/PowerUps.gif?raw=true)
 ![EndPana](https://github.com/nikademsar/Power-up-sah/blob/main/Images/EndPanal.png?raw=true)
 
 ---
