@@ -439,6 +439,7 @@
 "Assets/Scripts/Themes/Red.cs"
 "Assets/Scripts/Themes/ThemeDropdown.cs"
 "Assets/Scripts/Themes/Yellow.cs"
+"Assets/Scripts/UI/HoverText.cs"
 "Assets/Scripts/UI/ScoreUI.cs"
 "Assets/Scripts/UI/SettingsUI.cs"
 "Assets/Scripts/UI/ToggleBotImages.cs"
