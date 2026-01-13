@@ -289,11 +289,8 @@ public class Game : MonoBehaviour
 
     public void OnPlayPressed()
     {
-        // Start a new match from a clean state
-        if (boardInitialized)
-            ClearBoard();
+        ResetGameState();
 
-        currentPlayer = "white";
         gameOver = false;
 
         if (startPanel != null) startPanel.SetActive(false);
@@ -472,6 +469,7 @@ public class Game : MonoBehaviour
         else
             Debug.LogWarning("Game: scoreUI is not assigned; score text won't auto-refresh.");
 
+        DestroyAllMovePlates();
 
         gameOver = true;
 
@@ -554,7 +552,13 @@ public class Game : MonoBehaviour
         return Piece.Empty;
     }
 
-    
+    private void DestroyAllMovePlates()
+    {
+        var plates = GameObject.FindGameObjectsWithTag("MovePlate");
+        foreach (var p in plates)
+            Destroy(p);
+    }
+
     
     public bool ApplyEngineMove(Move m)
     {
@@ -615,5 +619,36 @@ public class Game : MonoBehaviour
         NextTurn();   // <- tole
         return true;
     }
+
+    private void ResetGameState()
+    {
+        // --- logično stanje ---
+        currentPlayer = "white";
+        gameOver = false;
+        boardInitialized = false;
+
+        currentPowerUp = -1;
+        powerUpMoves = 2;
+        powerUpsEnabled = false;
+
+        selectedPiece1 = null;
+        selectedPiece2 = null;
+
+        whiteLostPieces = 0;
+        blackLostPieces = 0;
+
+        // --- UI ---
+        if (startPanel != null) startPanel.SetActive(false);
+        if (endPanel != null) endPanel.SetActive(false);
+
+        // --- plošča ---
+        DestroyAllMovePlates();
+        ClearBoard();
+
+        // --- dodatni UI ---
+        capturedUI?.Clear();
+        moveLogger?.Clear();
+    }
+
 
 }
